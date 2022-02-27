@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
 * {
     box-sizing: border-box;
 }
 
 body {
-    margin: 0
+    margin: 0;
+    font-family: 'Ubuntu';
 }
 
 header {
@@ -17,14 +20,129 @@ header {
     margin: auto;
 }
 
+.header-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.header-container .logo-container{
+    margin-left: 10px;
+    display: flex;
+}
+
+.header-container .logo-container .logo{
+    margin: auto;
+    margin-left: 120px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.header-container .logo-container button{
+    width: 50px;
+    height: 50px;
+    border: hidden;
+}
+
+.header-container .date-container{
+    width: 250px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.header-container .date-container button{
+    margin: auto;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: hidden;
+}
+
+.header-container .date-container .month-container{
+    margin: auto;
+    height: 100%;
+    width: 100px;
+    display: flex;
+    border-radius: 5px;
+    background-color: gainsboro;
+}
+
+.header-container .settings-container{
+    margin-right: 50px;
+    display: flex;
+}
+
+.header-container .settings-container .settings button{
+    margin: auto;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: hidden;
+}
+
+.header-container .settings-container .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 50px;
+    margin-right: 60px;
+}
+
+.header-container .settings-container .switch .toggle-button {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 50px;
+    margin: 0;
+    vertical-align: top;
+    background: #ffffff;
+    border: 1px solid #bbc1e1;
+    border-radius: 30px;
+    outline: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    transition: all 0.3s cubic-bezier(0.2, 0.85, 0.32, 1.2);
+}
+
+.header-container .settings-container .switch .toggle-button::after {
+    content: "";
+
+    display: inline-block;
+    position: absolute;
+    left: 3px;
+    top: 1.5px;
+
+    width: 45px;
+    height: 45px;
+    background-color: gainsboro;
+    border-radius: 50%;
+
+    transform: translateX(0);
+    transition: all 0.3s cubic-bezier(0.2, 0.85, 0.32, 1.2);
+}
+
+.header-container .settings-container .switch .toggle-button:checked::after {
+    transform: translateX(calc(100% + 3px));
+    background-color: #fff;  
+}
+
+.header-container .settings-container .switch .toggle-button:checked {
+    background-color: gainsboro;
+}
+
 .container .user-container {
     width: 20%;
+    height: 100%;
     background-color: aqua;
     display: flex;
 }
 
 .container .calendar-container {
     width: 80%;
+    height: 100%;
     background-color: aquamarine;
     display: flex;
 }
