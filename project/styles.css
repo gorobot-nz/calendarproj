@@ -150,3 +150,11 @@ header {
 p {
     margin: auto;
 }
+
+@media screen and (max-width: 500px) {
+    .header-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
