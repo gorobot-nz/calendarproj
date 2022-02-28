@@ -10,24 +10,32 @@ body {
 }
 
 header {
-    padding: 20px 10px;
+    padding: 0px 10px;
+    height: 10vh;
+}
+
+main{
+    height: 90vh;
 }
 
 .container {
     display: flex;
     flex-direction: row;
-    height: 700px;
+    height: 100%;
     margin: auto;
+    position: relative;
 }
 
 .header-container{
     display: flex;
     flex-direction: row;
+    height: 100%;
     justify-content: space-between;
 }
 
 .header-container .logo-container{
     margin-left: 10px;
+    height: 100%;
     display: flex;
 }
 
@@ -41,12 +49,16 @@ header {
 .header-container .logo-container button{
     width: 50px;
     height: 50px;
+    border-radius: 5px;
     border: hidden;
+    margin: auto;
 }
 
 .header-container .date-container{
     width: 250px;
+    height: 100%;
     display: flex;
+    margin: auto;
     flex-direction: row;
     justify-content: space-between;
 }
@@ -57,20 +69,27 @@ header {
     height: 50px;
     border-radius: 50%;
     border: hidden;
+    margin: auto;
 }
 
 .header-container .date-container .month-container{
     margin: auto;
-    height: 100%;
+    height: 50px;
     width: 100px;
     display: flex;
     border-radius: 5px;
     background-color: gainsboro;
+    margin: auto;
 }
 
 .header-container .settings-container{
+    height: 100%;
     margin-right: 50px;
     display: flex;
+}
+
+.header-container .settings-container .settings{
+    margin: auto;
 }
 
 .header-container .settings-container .settings button{
@@ -84,6 +103,7 @@ header {
 .header-container .settings-container .switch {
     position: relative;
     display: inline-block;
+    margin: auto;
     width: 60px;
     height: 50px;
     margin-right: 60px;
@@ -137,7 +157,88 @@ header {
     width: 20%;
     height: 100%;
     background-color: aqua;
+    flex-direction: column;
     display: flex;
+    justify-content: space-around;
+}
+
+.container .user-container .avatar-container{
+    margin: auto;
+    height: 20%;
+    display: flex;
+}
+
+.container .user-container #user-avatar{
+    margin: auto;
+    width: 100px;
+    height: 100px;
+    border: 5px black solid;
+    border-radius: 50%;
+}
+
+.container .user-container .user-content-container{
+    margin: auto;
+    height: 65%;
+    width: 100%;
+    display: flex;
+}
+
+*::-webkit-scrollbar {
+    width: 1px;
+  }
+
+.container .user-container .user-content-container .user-content{
+    width: 80%;
+    height: 100%;
+    background-color: gray;
+    border: 5px black solid;
+    border-radius: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.container .user-container .user-content-container .user-content .task{
+    border: 3px black solid;
+    margin: auto;
+    width: 85%;
+    border-radius: 5px;
+    margin-top: 5px;
+    color: white;
+    background-color: black;
+}
+
+.container .user-container .user-content-container .user-content .event{
+    border: 3px black solid;
+    margin: auto;
+    width: 85%;
+    border-radius: 5px;
+    margin-top: 5px;
+    background-color: yellow;
+}
+
+.container .user-container .user-content-container .user-content .reminder{
+    border: 3px black solid;
+    margin: auto;
+    width: 85%;
+    border-radius: 5px;
+    margin-top: 5px;
+    background-color: white;
+}
+
+.container .user-container .button-container{
+    margin: auto;
+    height: 15%;
+    display: flex;
+}
+
+.container .user-container .button-container button{
+    border-radius: 10px;
+    border: 5px black solid;
+    margin: auto;
+    height: 60%;
+    width: 100px;
 }
 
 .container .calendar-container {
@@ -151,10 +252,18 @@ p {
     margin: auto;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 750px) {
+    header {
+        height: 30vh;
+    }
+
     .header-container{
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+    }
+
+    main{
+        height: 70vh;
     }
 }
