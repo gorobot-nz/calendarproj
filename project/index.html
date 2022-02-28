@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="./styles.css">
     <title>Calendar</title>
 </head>
+
 <body>
     <header>
         <div class="header-container">
@@ -18,13 +19,13 @@
                 <a class="logo">Calendar</a>
             </section>
             <section class="date-container">
-                <button>
+                <button class="prev">
                     <ion-icon name="arrow-back-outline"></ion-icon>
                 </button>
                 <div class="month-container">
                     <p>Prev</p>
                 </div>
-                <button>
+                <button class="next">
                     <ion-icon name="arrow-forward-outline"></ion-icon>
                 </button>
             </section>
@@ -93,7 +94,9 @@
                 </section>
             </section>
             <section class="calendar-container">
-                <p>Calendar</p>
+                <table class="days">
+                    
+                </table>
             </section>
         </div>
     </main>
@@ -101,4 +104,5 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
+
 </html>
