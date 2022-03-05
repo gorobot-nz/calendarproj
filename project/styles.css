@@ -4,17 +4,20 @@
     box-sizing: border-box;
 }
 
+*::-webkit-scrollbar {
+    width: 1px;
+}
+
 body {
     margin: 0;
     font-family: 'Ubuntu';
 }
 
 header {
-    padding: 0px 10px;
     height: 10vh;
 }
 
-main{
+main {
     height: 90vh;
 }
 
@@ -24,52 +27,59 @@ main{
     height: 100%;
 }
 
-.container{
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-}
-
-.container .logo-container{
-    margin-left: 10px;
-    height: 100%;
-    display: flex;
-}
-
-.container .logo-container .logo{
-    margin: auto;
-    margin-left: 120px;
-    font-size: 25px;
-    font-weight: bold;
-}
-
-.container .logo-container button{
+.btn {
     width: 50px;
     height: 50px;
-    border-radius: 5px;
+    border-radius: 10px;
     border: hidden;
     margin: auto;
 }
 
-.container .date-container{
-    width: 250px;
+.round-btn {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border: hidden;
+    margin: auto;
+}
+
+.wide-btn {
+    border-radius: 20px;
+    width: 200px;
+    height: 50px;
+    border: hidden;
+    margin: auto;
+    border: 3px solid bla;
+}
+
+.header__button-container {
     height: 100%;
+    width: 5%;
+    display: flex;
+}
+
+.header__logo-container {
+    height: 100%;
+    width: 25%;
+    display: flex;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    margin: auto;
+}
+
+.header__date-container {
+    height: 100%;
+    width: 50%;
     display: flex;
     margin: auto;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.container .date-container button{
-    margin: auto;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: hidden;
-    margin: auto;
-}
-
-.container .date-container .month-container{
+.header__date-container__month-container {
     margin: auto;
     height: 50px;
     width: 100px;
@@ -79,25 +89,17 @@ main{
     margin: auto;
 }
 
-.container .settings-container{
+.header__settings-container {
     height: 100%;
-    margin-right: 50px;
+    width: 20%;
     display: flex;
 }
 
-.container .settings-container .settings{
+.header__settings-container .settings {
     margin: auto;
 }
 
-.container .settings-container .settings button{
-    margin: auto;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: hidden;
-}
-
-.container .settings-container .switch {
+.switch {
     position: relative;
     display: inline-block;
     margin: auto;
@@ -106,7 +108,7 @@ main{
     margin-right: 60px;
 }
 
-.container .settings-container .switch .toggle-button {
+.switch .toggle-button {
     position: relative;
     display: inline-block;
     width: 100px;
@@ -124,7 +126,7 @@ main{
     transition: all 0.3s cubic-bezier(0.2, 0.85, 0.32, 1.2);
 }
 
-.container .settings-container .switch .toggle-button::after {
+.switch .toggle-button::after {
     content: "";
 
     display: inline-block;
@@ -141,16 +143,16 @@ main{
     transition: all 0.3s cubic-bezier(0.2, 0.85, 0.32, 1.2);
 }
 
-.container .settings-container .switch .toggle-button:checked {
+.switch .toggle-button:checked {
     background-color: gainsboro;
 }
 
-.container .settings-container .switch .toggle-button:checked::after {
+.switch .toggle-button:checked::after {
     transform: translateX(calc(100% + 3px));
-    background-color: #fff;  
+    background-color: #fff;
 }
 
-.container .user-container {
+.user-container {
     width: 20%;
     height: 100%;
     background-color: aqua;
@@ -159,13 +161,13 @@ main{
     justify-content: space-around;
 }
 
-.container .user-container .avatar-container{
+.user-container__avatar-container {
     margin: auto;
     height: 20%;
     display: flex;
 }
 
-.container .user-container #user-avatar{
+.user-container__avatar-container #user-avatar {
     margin: auto;
     width: 100px;
     height: 100px;
@@ -173,18 +175,14 @@ main{
     border-radius: 50%;
 }
 
-.container .user-container .user-content-container{
+.user-container__user-challenges-container {
     margin: auto;
     height: 65%;
     width: 100%;
     display: flex;
 }
 
-*::-webkit-scrollbar {
-    width: 1px;
-  }
-
-.container .user-container .user-content-container .user-content{
+.user-container__user-challenges-container__user-chalenges {
     width: 80%;
     height: 100%;
     background-color: gray;
@@ -196,7 +194,7 @@ main{
     margin: auto;
 }
 
-.container .user-container .user-content-container .user-content .task{
+.task {
     border: 3px black solid;
     margin: auto;
     width: 95%;
@@ -206,7 +204,7 @@ main{
     background-color: black;
 }
 
-.container .user-container .user-content-container .user-content .event{
+.event {
     border: 3px black solid;
     margin: auto;
     width: 95%;
@@ -215,7 +213,7 @@ main{
     background-color: yellow;
 }
 
-.container .user-container .user-content-container .user-content .reminder{
+.reminder {
     border: 3px black solid;
     margin: auto;
     width: 95%;
@@ -224,82 +222,19 @@ main{
     background-color: white;
 }
 
-.container .user-container .button-container{
+.user-container__button-container {
     margin: auto;
     height: 15%;
     display: flex;
 }
 
-.container .user-container .button-container button{
-    border-radius: 10px;
-    border: 5px black solid;
-    margin: auto;
-    height: 60%;
-    width: 100px;
-}
-
-.container .calendar-container {
+.calendar-container {
     width: 80%;
     height: 100%;
     background-color: aquamarine;
     display: flex;
     justify-content: center;
 }
-
-.container .calendar-container .weekdays {
-    width: 100%;
-    height: 10%;
-    padding: 0 0.4rem;
-    display: flex;
-    align-items: center;
-}
-
-.container .calendar-container .weekdays div {
-    font-size: 25px;
-    font-weight: bold;
-    letter-spacing: 0.1rem;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.container .calendar-container .days {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 0.2rem;
-}
-
-.container .calendar-container .days div {
-    font-size: 1.4rem;
-    margin: auto;
-    width: calc(40.2rem / 7);
-    height: 5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
-    transition: background-color 0.2s;
-}
-
-.container .calendar-container .days div:hover:not(.today) {
-    background-color: #262626;
-    border: 0.2rem solid #777;
-    color: whitesmoke;
-    cursor: pointer;
-}
-
-.container .calendar-container .days .prev-date, .next-date {
-  opacity: 0.5;
-}
-
-.container .calendar-container .days .today {
-    background-color: #167e56;
-}
-
 
 p {
     margin: auto;
@@ -310,13 +245,13 @@ p {
         height: 30vh;
     }
 
-    .container{
+    .container {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
 
-    main{
+    main {
         height: 70vh;
     }
 }

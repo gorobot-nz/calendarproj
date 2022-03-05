@@ -12,43 +12,45 @@
 <body>
     <header>
         <div class="container">
-            <section class="logo-container">
-                <button>
+            <div class="header__button-container">
+                <button id="switch-user-menu-button" class="btn">
                     <ion-icon name="menu-outline"></ion-icon>
                 </button>
+            </div>
+            <div class="header__logo-container">
                 <a class="logo">Calendar</a>
-            </section>
-            <section class="date-container">
-                <button class="prev">
+            </div>
+            <div class="header__date-container">
+                <button id="prev-month-button" class="round-btn">
                     <ion-icon name="arrow-back-outline"></ion-icon>
                 </button>
-                <div class="month-container">
+                <div class="header__date-container__month-container">
                     <p>Prev</p>
                 </div>
-                <button class="next">
+                <button id="next-month-button" class="round-btn">
                     <ion-icon name="arrow-forward-outline"></ion-icon>
                 </button>
-            </section>
-            <section class="settings-container">
+            </div>
+            <div class="header__settings-container">
                 <div class="switch">
                     <input type="checkbox" id="toggle-button" class="toggle-button">
                 </div>
                 <div class="settings">
-                    <button>
+                    <button class="round-btn">
                         <ion-icon name="settings-outline"></ion-icon>
                     </button>
                 </div>
-            </section>
+            </div>
         </div>
     </header>
     <main>
         <div class="container">
             <section class="user-container">
-                <section class="avatar-container">
-                    <img id="user-avatar" src="./img/saitama-1-coloring-page.jpg">
-                </section>
-                <section class="user-content-container">
-                    <div class="user-content">
+                <div class="user-container__avatar-container">
+                    <img id="user-avatar" src="./img/c46888f9135c3b440f5d9060a345b35e.png">
+                </div>
+                <div class="user-container__user-challenges-container">
+                    <div class="user-container__user-challenges-container__user-chalenges">
                         <div class="task">Task</div>
                         <div class="event">Event</div>
                         <div class="reminder">Reminder</div>
@@ -86,15 +88,15 @@
                         <div class="event">Event</div>
                         <div class="reminder">Reminder</div>
                     </div>
-                </section>
-                <section class="button-container">
-                    <button>
+                </div>
+                <div class="user-container__button-container">
+                    <button class="wide-btn">
                         <ion-icon name="add-outline"></ion-icon>
                     </button>
-                </section>
+                </div>
             </section>
             <section class="calendar-container">
-                <table class="days">
+                <table id="days-table" class="calendar-container__days">
                     
                 </table>
             </section>
