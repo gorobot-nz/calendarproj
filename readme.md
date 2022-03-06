@@ -1,6 +1,6 @@
 # Calendar
 
-Calendar for tasks, events and reminders
+Calendar for tasks, events and reminders (Zhamoidzik, 953501)
 
 ![calendar-mock](./srcimg.jpg)
 
