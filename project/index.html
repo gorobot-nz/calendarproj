@@ -9,11 +9,11 @@
     <title>Calendar</title>
 </head>
 
-<body>
+<body class="light-theme">
     <header>
         <div class="container">
             <div class="header__button-container">
-                <button id="switch-user-menu-button" class="btn">
+                <button id="switch-user-menu-button" class="btn shadow">
                     <ion-icon name="menu-outline"></ion-icon>
                 </button>
             </div>
@@ -21,13 +21,13 @@
                 <a class="logo">Calendar</a>
             </div>
             <div class="header__date-container">
-                <button id="prev-month-button" class="round-btn">
+                <button id="prev-month-button" class="round-btn shadow">
                     <ion-icon name="arrow-back-outline"></ion-icon>
                 </button>
-                <div class="header__date-container__month-container">
+                <div class="header__date-container__month-container shadow">
                     <p>Prev</p>
                 </div>
-                <button id="next-month-button" class="round-btn">
+                <button id="next-month-button" class="round-btn shadow">
                     <ion-icon name="arrow-forward-outline"></ion-icon>
                 </button>
             </div>
@@ -36,7 +36,7 @@
                     <input type="checkbox" id="toggle-button" class="toggle-button">
                 </div>
                 <div class="settings">
-                    <button class="round-btn">
+                    <button class="round-btn shadow">
                         <ion-icon name="settings-outline"></ion-icon>
                     </button>
                 </div>
@@ -47,57 +47,106 @@
         <div class="container">
             <section class="user-container">
                 <div class="user-container__avatar-container">
-                    <img id="user-avatar" src="./img/c46888f9135c3b440f5d9060a345b35e.png">
+                    <img class="shadow" id="user-avatar" src="./img/c46888f9135c3b440f5d9060a345b35e.png">
                 </div>
                 <div class="user-container__user-challenges-container">
-                    <div class="user-container__user-challenges-container__user-chalenges">
-                        <div class="task">Task</div>
-                        <div class="event">Event</div>
-                        <div class="reminder">Reminder</div>
-                        <div class="task">Task</div>
-                        <div class="event">Event</div>
-                        <div class="reminder">Reminder</div>
-                        <div class="task">Task</div>
-                        <div class="event">Event</div>
-                        <div class="reminder">Reminder</div>
-                        <div class="task">Task</div>
-                        <div class="event">Event</div>
-                        <div class="reminder">Reminder</div>
-                        <div class="task">Task</div>
-                        <div class="event">Event</div>
-                        <div class="reminder">Reminder</div>
-                        <div class="task">Task</div>
-                        <div class="event">Event</div>
-                        <div class="reminder">Reminder</div>
-                        <div class="task">Task</div>
-                        <div class="event">Event</div>
-                        <div class="reminder">Reminder</div>
-                        <div class="task">Task</div>
-                        <div class="event">Event</div>
-                        <div class="reminder">Reminder</div>
-                        <div class="task">Task</div>
-                        <div class="event">Event</div>
-                        <div class="reminder">Reminder</div>
-                        <div class="task">Task</div>
-                        <div class="event">Event</div>
-                        <div class="reminder">Reminder</div>
-                        <div class="task">Task</div>
-                        <div class="event">Event</div>
-                        <div class="reminder">Reminder</div>
-                        <div class="task">Task</div>
-                        <div class="event">Event</div>
-                        <div class="reminder">Reminder</div>
+                    <div class="user-container__user-challenges-container__user-chalenges shadow">
+                        <div class="challenge task shadow">Task</div>
+                        <div class="challenge event shadow">Event</div>
+                        <div class="challenge reminder shadow">Reminder</div>
                     </div>
                 </div>
                 <div class="user-container__button-container">
-                    <button class="wide-btn">
+                    <button class="wide-btn shadow">
                         <ion-icon name="add-outline"></ion-icon>
                     </button>
                 </div>
             </section>
             <section class="calendar-container">
                 <table id="days-table" class="calendar-container__days">
-                    
+                    <thead class="day-names">
+                        <tr>
+                            <th class="day-names__day">Monday</th>
+                            <th class="day-names__day">Tuesday</th>
+                            <th class="day-names__day">Wenesday</th>
+                            <th class="day-names__day">Thursday</th>
+                            <th class="day-names__day">Friday</th>
+                            <th class="day-names__day">Saturday</th>
+                            <th class="day-names__day">Sunday</th>
+                        </tr>
+                    </thead>
+                    <tbody class="day-values">
+                        <tr id='1' class="day-values__week">
+                            <td class="day-values__week__day past-month-date">
+                                <div class="day-values__week__day__day-info">
+                                    <div class="day-values__week__day__day-info__day-num">
+                                        <p>15</p>
+                                    </div>
+                                    <div class="day-values__week__day__day-info__day-tasks">
+                                        <div class="challenge task">2 Tasks</div>
+                                        <div class="challenge event">1 Event</div>
+                                        <div class="challenge reminder">3 Reminders</div>   
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="day-values__week__day past-month-date">Day</td>
+                            <td class="day-values__week__day past-month-date">Day</td>
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day">Day</td>
+                        </tr>
+                        <tr id='2' class="day-values__week">
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day">
+                                <div class="day-values__week__day__day-info__day-num">
+                                    <p>11</p>
+                                </div>
+                                <div class="day-values__week__day__day-info__day-tasks">
+                                    <div class="challenge task">1 Task</div>
+                                </div>
+                            </td>
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day">Day</td>
+                        </tr>
+                        <tr id='3' class="day-values__week">
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day current-date">
+                                <div class="day-values__week__day__day-info__day-num">
+                                    <p>15</p>
+                                </div>
+                                <div class="day-values__week__day__day-info__day-tasks">
+                                    <div class="challenge reminder">3 Reminders</div>   
+                                </div>   
+                            </td>
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day">Day</td>
+                        </tr>
+                        <tr id='4' class="day-values__week">
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day">Day</td>
+                        </tr>
+                        <tr id='5' class="day-values__week">
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day">Day</td>
+                            <td class="day-values__week__day next-month-date">Day</td>
+                            <td class="day-values__week__day next-month-date">Day</td>
+                            <td class="day-values__week__day next-month-date">Day</td>
+                            <td class="day-values__week__day next-month-date">Day</td>
+                        </tr>
+                    </tbody>
                 </table>
             </section>
         </div>

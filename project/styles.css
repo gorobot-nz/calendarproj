@@ -8,6 +8,16 @@
     width: 1px;
 }
 
+.light-theme{
+    background-color: whitesmoke;
+    color: black;
+}
+
+.dark-theme{
+    background-color: #555b6e;
+    color: white;
+}
+
 body {
     margin: 0;
     font-family: 'Ubuntu';
@@ -19,6 +29,18 @@ header {
 
 main {
     height: 90vh;
+}
+
+.past-month-date {
+    background-color: lightsteelblue;
+}
+
+.current-date {
+    background-color: #ccb055;
+}
+
+.next-month-date {
+    background-color: lightslategray;
 }
 
 .container {
@@ -33,6 +55,8 @@ main {
     border-radius: 10px;
     border: hidden;
     margin: auto;
+    border: 1px black solid;
+    cursor: pointer;
 }
 
 .round-btn {
@@ -41,6 +65,8 @@ main {
     height: 50px;
     border: hidden;
     margin: auto;
+    border: 1px black solid;
+    cursor: pointer;
 }
 
 .wide-btn {
@@ -49,7 +75,12 @@ main {
     height: 50px;
     border: hidden;
     margin: auto;
-    border: 3px solid bla;
+    border: 1px black solid;
+    cursor: pointer;
+}
+
+.shadow {
+    box-shadow: 3px 3px gray;
 }
 
 .header__button-container {
@@ -85,6 +116,7 @@ main {
     width: 100px;
     display: flex;
     border-radius: 5px;
+    border: 1px solid black;
     background-color: gainsboro;
     margin: auto;
 }
@@ -155,10 +187,10 @@ main {
 .user-container {
     width: 20%;
     height: 100%;
-    background-color: aqua;
     flex-direction: column;
     display: flex;
     justify-content: space-around;
+    border-top: 1px black solid;
 }
 
 .user-container__avatar-container {
@@ -171,7 +203,8 @@ main {
     margin: auto;
     width: 100px;
     height: 100px;
-    border: 5px black solid;
+    border: 1px black solid;
+    background-color: white;
     border-radius: 50%;
 }
 
@@ -185,8 +218,8 @@ main {
 .user-container__user-challenges-container__user-chalenges {
     width: 80%;
     height: 100%;
-    background-color: gray;
-    border: 5px black solid;
+    background-color: white;
+    border: 1px black solid;
     border-radius: 10px;
     overflow-y: auto;
     display: flex;
@@ -194,32 +227,27 @@ main {
     margin: auto;
 }
 
-.task {
-    border: 3px black solid;
-    margin: auto;
+
+.challenge {
+    border: 1px black solid;
     width: 95%;
     border-radius: 5px;
     margin-top: 5px;
+    margin-left: 6px;
+    cursor: pointer;
+}
+
+.task {
     color: white;
-    background-color: black;
+    background-color: #555b6e;
 }
 
 .event {
-    border: 3px black solid;
-    margin: auto;
-    width: 95%;
-    border-radius: 5px;
-    margin-top: 5px;
-    background-color: yellow;
+    background-color: #89b0ae;
 }
 
 .reminder {
-    border: 3px black solid;
-    margin: auto;
-    width: 95%;
-    border-radius: 5px;
-    margin-top: 5px;
-    background-color: white;
+    background-color: #bee3db;
 }
 
 .user-container__button-container {
@@ -231,27 +259,121 @@ main {
 .calendar-container {
     width: 80%;
     height: 100%;
-    background-color: aquamarine;
     display: flex;
     justify-content: center;
+    border: 1px black solid;
+}
+
+.calendar-container__days {
+    width: 100%;
+    height: 100%;
+}
+
+.day-names{
+    width: 100%;
+    height: 7%;
+    background-color: wheat;
+}
+
+.day-names__day{
+    border: 1px black solid;
+    width: calc(100% / 7);
+}
+
+.day-values{
+    width: 100%;
+    height: 93%;
+}
+
+.day-values__week {
+    height: 20%;
+    width: 100%;
+}
+
+.day-values__week__day {
+    width: calc(100%/7);
+    border: 1px black solid;
+    cursor: pointer;
+}
+
+.day-values__week__day__day-info {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.day-values__week__day__day-info__day-num {
+    height: 15%;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.day-values__week__day__day-info__day-tasks{
+    height: 85%;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 p {
     margin: auto;
 }
 
+@media screen and (max-width: 1200px) {
+    .wide-btn {
+        width: 100px;
+        height: 50px;
+    }
+
+    .header__button-container{
+        width: 10%;
+    }
+
+    .header__logo-container{
+        width: 15%;
+    }
+
+    .header__date-container {
+        width: 40%;
+    }
+
+    .header__settings-container{
+        width: 35%;
+    }
+}
+
+@media screen and (max-height: 750px) {
+    .day-values__week__day__day-info__day-tasks{
+        display: none;
+    }
+}
+
 @media screen and (max-width: 750px) {
     header {
-        height: 30vh;
+        height: 10vh;
+    }
+
+
+    main {
+        height: 90vh;
     }
 
     .container {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: space-between;
     }
 
-    main {
-        height: 70vh;
+    .header__logo-container{
+        display: none;
+    }
+
+    .user-container {
+        display: none;
+    }
+
+    .calendar-container{
+        width: 100%;
     }
 }
