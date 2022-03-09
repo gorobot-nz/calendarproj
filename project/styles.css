@@ -21,14 +21,17 @@
 body {
     margin: 0;
     font-family: 'Ubuntu';
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
-    height: 10vh;
+    height: 80px;
 }
 
 main {
-    height: 90vh;
+    height: calc(100vh - 80px);
 }
 
 .past-month-date {
@@ -50,6 +53,7 @@ main {
     display: flex;
     flex-direction: row;
     height: 100%;
+    width: 100%;
 }
 
 .btn {
@@ -60,6 +64,26 @@ main {
     margin: auto;
     border: 1px black solid;
     cursor: pointer;
+    display: flex;
+}
+
+.btn:hover{
+    background-color: #555b6e;
+    color: white;  
+}
+
+.btn:focus{
+    background-color: #555b6e;
+    color: white;  
+}
+
+.btn:active{
+    background-color: #1f2127;
+    color: white;  
+}
+
+.btn:disabled{
+    background: wheat;
 }
 
 .round-btn {
@@ -70,6 +94,26 @@ main {
     margin: auto;
     border: 1px black solid;
     cursor: pointer;
+    display: flex;
+}
+
+.round-btn:hover{
+    background-color: #555b6e;
+    color: white;  
+}
+
+.round-btn:focus{
+    background-color: #555b6e;
+    color: white;  
+}
+
+.round-btn:active{
+    background-color: #1f2127;
+    color: white;  
+}
+
+.round-btn:disabled{
+    background: wheat;
 }
 
 .wide-btn {
@@ -80,6 +124,26 @@ main {
     margin: auto;
     border: 1px black solid;
     cursor: pointer;
+    display: flex;
+}
+
+.wide-btn:hover{
+    background-color: #555b6e;
+    color: white;  
+}
+
+.wide-btn:focus{
+    background-color: #555b6e;
+    color: white;  
+}
+
+.wide-btn:active{
+    background-color: #1f2127;
+    color: white;  
+}
+
+.wide-btn:disabled{
+    background: wheat;
 }
 
 .button-content {
@@ -169,7 +233,7 @@ main {
     display: inline-block;
     position: absolute;
     left: 3px;
-    top: 1.5px;
+    top: 1px;
 
     width: 45px;
     height: 45px;
@@ -236,10 +300,16 @@ main {
 .challenge {
     border: 1px black solid;
     width: 95%;
+    height: 100px;
     border-radius: 5px;
-    margin-top: 5px;
-    margin-left: 6px;
     cursor: pointer;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+}
+
+.challenge__inner {
+    margin: auto
 }
 
 .task {
@@ -283,6 +353,7 @@ main {
 .day-names__day {
     border: 1px black solid;
     width: calc(100% / 7);
+    height:  100%;
 }
 
 .day-values {
@@ -297,6 +368,7 @@ main {
 
 .day-values__week__day {
     width: calc(100%/7);
+    height: 20%;
     border: 1px black solid;
     cursor: pointer;
 }
@@ -319,6 +391,7 @@ main {
     padding-top: 10px;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 }
 
 p {
