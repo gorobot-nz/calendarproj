@@ -8,12 +8,12 @@
     width: 1px;
 }
 
-:root{
+:root {
     --whitesmoke: whitesmoke;
     --darktheme-black: #747474;
     --lightsteelblue: lightsteelblue;
     --lightsteelgray: lightsteelgray;
-    --current-orange:#ccb055;
+    --current-orange: #ccb055;
     --task-grey: #555b6e;
     --event-green: #89b0ae;
     --reminder-light: #bee3db;
@@ -38,27 +38,31 @@ body {
     flex-direction: column;
 }
 
-header {
+.header {
     height: 80px;
 }
 
-main {
-    height: calc(100vh - 80px);
+.main {
+    position: fixed;
+    top: 80px;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .past-month-date {
     background-color: var(--lightsteelblue);
-    margin:auto;
+    margin: auto;
 }
 
 .current-date {
     background-color: var(--current-orange);
-    margin:auto;
+    margin: auto;
 }
 
 .next-month-date {
     background-color: var(--lightsteelgray);
-    margin:auto;
+    margin: auto;
 }
 
 .container {
@@ -79,22 +83,22 @@ main {
     display: flex;
 }
 
-.btn:hover{
+.btn:hover {
     background-color: var(--task-grey);
-    color: white;  
+    color: white;
 }
 
-.btn:focus{
+.btn:focus {
     background-color: var(--task-grey);
-    color: white;  
+    color: white;
 }
 
-.btn:active{
+.btn:active {
     background-color: #1f2127;
-    color: white;  
+    color: white;
 }
 
-.btn:disabled{
+.btn:disabled {
     background: wheat;
 }
 
@@ -109,22 +113,22 @@ main {
     display: flex;
 }
 
-.round-btn:hover{
+.round-btn:hover {
     background-color: var(--task-grey);
-    color: white;  
+    color: white;
 }
 
-.round-btn:focus{
+.round-btn:focus {
     background-color: var(--task-grey);
-    color: white;  
+    color: white;
 }
 
-.round-btn:active{
+.round-btn:active {
     background-color: #1f2127;
-    color: white;  
+    color: white;
 }
 
-.round-btn:disabled{
+.round-btn:disabled {
     background: wheat;
 }
 
@@ -139,22 +143,22 @@ main {
     display: flex;
 }
 
-.wide-btn:hover{
+.wide-btn:hover {
     background-color: var(--task-grey);
-    color: white;  
+    color: white;
 }
 
-.wide-btn:focus{
+.wide-btn:focus {
     background-color: var(--task-grey);
-    color: white;  
+    color: white;
 }
 
-.wide-btn:active{
+.wide-btn:active {
     background-color: #1f2127;
-    color: white;  
+    color: white;
 }
 
-.wide-btn:disabled{
+.wide-btn:disabled {
     background: wheat;
 }
 
@@ -216,53 +220,63 @@ main {
 
 .switch {
     margin: auto;
-    width: 60px;
-    height: 50px;
-    margin-right: 60px;
-}
-
-.switch .toggle-button {
     position: relative;
     display: inline-block;
-    width: 100px;
+    width: 92px;
     height: 50px;
-    margin: 0;
-    vertical-align: top;
-    background: #ffffff;
-    border: 1px solid #bbc1e1;
-    border-radius: 30px;
-    outline: none;
-    cursor: pointer;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    transition: all 0.3s cubic-bezier(0.2, 0.85, 0.32, 1.2);
 }
 
-.switch .toggle-button::after {
-    content: "";
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
 
-    display: inline-block;
+.slider {
     position: absolute;
-    left: 3px;
-    top: 1px;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--darktheme-black);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
 
-    width: 45px;
-    height: 45px;
-    background-color: gainsboro;
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 42px;
+    width: 42px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: white;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px whitesmoke;
+}
+
+input:checked+.slider:before {
+    background-color: var(--darktheme-black);
+    -webkit-transform: translateX(42px);
+    -ms-transform: translateX(42px);
+    transform: translateX(42px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
     border-radius: 50%;
-
-    transform: translateX(0);
-    transition: all 0.3s cubic-bezier(0.2, 0.85, 0.32, 1.2);
-}
-
-.switch .toggle-button:checked {
-    background-color: gainsboro;
-}
-
-.switch .toggle-button:checked::after {
-    transform: translateX(calc(100% + 3px));
-    background-color: #fff;
 }
 
 .user-container {
@@ -365,7 +379,7 @@ main {
 .day-names__day {
     border: 1px var(--border-black) solid;
     width: calc(100% / 7);
-    height:  100%;
+    height: 100%;
 }
 
 .day-values {
@@ -433,19 +447,78 @@ p {
 }
 
 @media screen and (max-height: 750px) {
+
+
+    .header {
+        height: 55px;
+    }
+
+    .main {
+        top: 55px;
+    }
+
+
+    .header__date-container__month-container {
+        height: 45px;
+    }
+
     .day-values__week__day__day-info__day-tasks {
         width: 90%;
     }
 
-    .switch .toggle-button {
-        height: 25px;
-        width: 50px;
-        margin-top: 15px;
+    .btn {
+        width: 40px;
+        height: 40px;
     }
 
-    .switch .toggle-button::after {
-        height: 20px;
-        width: 20px;
+    .round-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .switch {
+        width: 72px;
+        height: 40px;
+    }
+
+    .slider:before {
+        height: 32px;
+        width: 32px;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(32px);
+        -ms-transform: translateX(32px);
+        transform: translateX(32px);
+    }
+}
+
+@media screen and (max-width: 750px) {
+    * {
+        font-size: 10px;
+    }
+
+    .header {
+        height: 40px;
+    }
+
+    .main {
+        top: 40px;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .header__logo-container {
+        display: none;
+    }
+
+    .header__date-container__month-container {
+        height: 25px;
+        width: 75px;
     }
 
     .btn {
@@ -458,33 +531,20 @@ p {
         height: 25px;
     }
 
-    .header__date-container__month-container {
+    .switch {
+        width: 42px;
         height: 25px;
     }
-}
 
-@media screen and (max-width: 750px) {
-    *{
-        font-size: 10px;
+    .slider:before {
+        height: 17px;
+        width: 17px;
     }
 
-    header {
-        height: 10vh;
-    }
-
-
-    main {
-        height: 90vh;
-    }
-
-    .container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    .header__logo-container {
-        display: none;
+    input:checked+.slider:before {
+        -webkit-transform: translateX(17px);
+        -ms-transform: translateX(17px);
+        transform: translateX(17px);
     }
 
     .user-container {

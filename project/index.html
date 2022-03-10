@@ -10,7 +10,7 @@
 </head>
 
 <body class="light-theme">
-    <header>
+    <header class="header">
         <div class="container">
             <div class="header__button-container">
                 <button id="switch-user-menu-button" class="btn shadow">
@@ -32,9 +32,10 @@
                 </button>
             </div>
             <div class="header__settings-container">
-                <div class="switch">
-                    <input type="checkbox" id="toggle-button" class="toggle-button">
-                </div>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
                 <div class="settings">
                     <button class="round-btn shadow">
                         <ion-icon class="button-content" name="settings-outline"></ion-icon>
@@ -43,7 +44,7 @@
             </div>
         </div>
     </header>
-    <main>
+    <main class="main">
         <div class="container">
             <section class="user-container">
                 <div class="user-container__avatar-container">
