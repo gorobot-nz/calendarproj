@@ -490,6 +490,11 @@ p {
         -ms-transform: translateX(32px);
         transform: translateX(32px);
     }
+
+    .user-container__avatar-container #user-avatar {
+        width: 50px;
+        height: 50px;
+    }
 }
 
 @media screen and (max-width: 750px) {
