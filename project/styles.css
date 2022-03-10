@@ -313,9 +313,11 @@ input:checked+.slider:before {
 .user-container__user-challenges-container__user-chalenges {
     width: 80%;
     height: 100%;
+    padding-bottom: 10px;
     background-color: white;
     border: 1px var(--border-black) solid;
     border-radius: 10px;
+    overflow-y: auto;
     margin: auto;
 }
 
@@ -492,8 +494,8 @@ p {
     }
 
     .user-container__avatar-container #user-avatar {
-        width: 50px;
-        height: 50px;
+        width: 75px;
+        height: 75px;
     }
 }
 
