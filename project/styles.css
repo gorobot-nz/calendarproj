@@ -425,6 +425,10 @@ p {
 }
 
 @media screen and (max-width: 1200px) {
+    * {
+        font-size: 10px;
+    }
+
     .wide-btn {
         width: 100px;
         height: 50px;
