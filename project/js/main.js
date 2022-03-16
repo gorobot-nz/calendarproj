@@ -18,10 +18,10 @@ const themeSwitchToggle = document.querySelector('#theme-switch-toggle')
 //main objects
 const mainDate = new Date();
 mainDate.setDate(1)
-
 let days = calculateDays()
-
 const calendar = new Calendar(days)
+
+const challenges = new Map()
 
 render()
 
@@ -72,23 +72,25 @@ function calculateDays() {
     const nextMonth = MONTHS[mainDate.getMonth()];
     mainDate.setMonth(mainDate.getMonth() - 1)
 
+    const check = [new CalendarEvent('bruh', '12121', false, 'bububub'), new CalendarTask('bruh', '12121', 'bububub'), new CalendarReminder('bruh', '12121')]
+
     for (let i = firstDayIndex; i > 0; i--) {
-        days.push(new Day(prevLastDay - i + 1, prevMonth, [], PAST_MONTH_DATE))
+        days.push(new Day(prevLastDay - i + 1, prevMonth, mainDate.getFullYear(), check, PAST_MONTH_DATE))
     }
 
     for (let i = 1; i <= lastDay; i++) {
         if (
             i === new Date().getDate() &&
             mainDate.getMonth() === new Date().getMonth()
-        ){
-            days.push(new Day(i, currMonth, [], CURRENT_DATE))
-        } else{
-            days.push(new Day(i, currMonth, []))
+        ) {
+            days.push(new Day(i, currMonth, mainDate.getFullYear(), check, CURRENT_DATE))
+        } else {
+            days.push(new Day(i, currMonth, mainDate.getFullYear(), []))
         }
     }
 
     for (let i = 1; i <= nextDays; i++) {
-        days.push(new Day(i, nextMonth, [], NEXT_MONTH_DATE))
+        days.push(new Day(i, nextMonth, mainDate.getFullYear(), [], NEXT_MONTH_DATE))
     }
 
     return days
@@ -98,8 +100,7 @@ function render() {
     days = calculateDays(mainDate)
     calendar.setDays(days)
     daysTable.innerHTML = ''
-    console.log(calendar.renderCalendar())
-    calendar.renderCalendar().map(item => console.log(daysTable.appendChild(item)))
+    calendar.renderCalendar().map(item => daysTable.appendChild(item))
 
     currentMonthContainer.innerHTML = `<p>${MONTHS[mainDate.getMonth()]} ${mainDate.getFullYear()}</p>`
 }

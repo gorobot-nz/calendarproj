@@ -24,3 +24,11 @@ const DAY_VALUES__WEEK = 'day-values__week'
 const DAY_VALUES__WEEK__DAY = 'day-values__week__day'
 const DAY_VALUES__WEEK__DAY__DAY_INFO__DAY_NUM = 'day-values__week__day__day-info__day-num'
 const DAY_VALUES__WEEK__DAY__DAY_INFO__DAY_TASKS = 'day-values__week__day__day-info__day-tasks'
+
+const CHALLENGE = 'challenge'
+const EVENT = 'event'
+const TASK = 'task'
+const REMINDER = 'reminder'
+
+
+const CHALLENGE__INNER = 'challenge__inner'

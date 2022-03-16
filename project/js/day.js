@@ -1,7 +1,8 @@
 class Day {
-    constructor(dayNum, dayMonth, challenges, addClassName = '') {
+    constructor(dayNum, dayMonth, dayYear, challenges, addClassName = '') {
         this.dayNum = dayNum
         this.dayMonth = dayMonth
+        this.dayYear = dayYear
         this.challenges = challenges
         this.addClassName = addClassName
     }
@@ -12,7 +13,7 @@ class Day {
         if (this.addClassName !== '') {
             dayTd.classList.add(this.addClassName)
         }
-        dayTd.id = `${this.dayMonth}-${this.dayNum}`
+        dayTd.id = `${this.dayMonth}-${this.dayNum}-${this.dayYear}`
         dayTd.onclick = (e) => {
             console.log(e.target)
         }
@@ -23,23 +24,9 @@ class Day {
 
         const dayChallengesContainer = document.createElement('div')
         dayChallengesContainer.className = DAY_VALUES__WEEK__DAY__DAY_INFO__DAY_TASKS
-        dayChallengesContainer.innerHTML = `
-            <div class="challenge task">
-                <div class="challenge__inner">
-                    Task
-                </div>
-            </div>
-            <div class="challenge event">
-                <div class="challenge__inner">
-                    Task
-                </div>
-            </div>
-            <div class="challenge reminder">
-                <div class="challenge__inner">
-                    Task
-                </div>
-            </div>
-        `
+        
+        this.challenges.map(challenge => dayChallengesContainer.appendChild(challenge.render()))
+
         dayTd.appendChild(dayNumContainer)
         dayTd.appendChild(dayChallengesContainer)
 
