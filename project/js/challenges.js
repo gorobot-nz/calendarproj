@@ -1,5 +1,6 @@
 class Challenge {
-    constructor(name, date) {
+    constructor(id, name, date) {
+        this.id = id
         this.name = name
         this.date = date
     }
@@ -18,39 +19,42 @@ class Challenge {
 }
 
 class CalendarEvent extends Challenge {
-    constructor(name, date, period, description) {
-        super(name, date)
+    constructor(id, name, date, description, period) {
+        super(id, name, date)
         this.description = description
         this.period = period
     }
 
     render() {
         const challenge = super.render()
+        challenge.id = `${this.id}-event`
         challenge.classList.add(EVENT)
         return challenge
     }
 }
 
 class CalendarTask extends Challenge {
-    constructor(name, date, description) {
-        super(name, date)
+    constructor(id, name, date, description) {
+        super(id, name, date)
         this.description = description
     }
 
     render() {
         const challenge = super.render()
+        challenge.id = `${this.id}-task`
         challenge.classList.add(TASK)
         return challenge
     }
 }
 
 class CalendarReminder extends Challenge {
-    constructor(name, date) {
-        super(name, date)
+    constructor(id, name, date) {
+        super(id, name, date)
     }
 
     render() {
         const challenge = super.render()
+        challenge.id = `${this.id}-reminder`
         challenge.classList.add(REMINDER)
         return challenge
     }

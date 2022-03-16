@@ -20,6 +20,10 @@
     --border-black: black;
 }
 
+.hidden-layout{
+    display: none;
+}
+
 .light-theme {
     background-color: var(--whitesmoke);
     color: black;
@@ -70,6 +74,25 @@ body {
     flex-direction: row;
     height: 100%;
     width: 100%;
+}
+
+.modal-layout {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+}
+
+.modal-layout__modal {
+    margin: auto;
+    width: 80%;
+    height: 80%;
+    border: 5px solid var(--border-black);
+    background-color: var(--whitesmoke);
+    border-radius: 50px;
 }
 
 .btn {

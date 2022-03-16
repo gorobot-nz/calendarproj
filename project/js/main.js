@@ -21,7 +21,7 @@ mainDate.setDate(1)
 let days = calculateDays()
 const calendar = new Calendar(days)
 
-const challenges = new Map()
+const daysStore = new Map()
 
 render()
 
@@ -72,7 +72,7 @@ function calculateDays() {
     const nextMonth = MONTHS[mainDate.getMonth()];
     mainDate.setMonth(mainDate.getMonth() - 1)
 
-    const check = [new CalendarEvent('bruh', '12121', false, 'bububub'), new CalendarTask('bruh', '12121', 'bububub'), new CalendarReminder('bruh', '12121')]
+    const check = [new CalendarEvent(1, 'bruh', '12121', false, 'bububub'), new CalendarTask(2, 'bruh', '12121', 'bububub'), new CalendarReminder(3, 'bruh', '12121')]
 
     for (let i = firstDayIndex; i > 0; i--) {
         days.push(new Day(prevLastDay - i + 1, prevMonth, mainDate.getFullYear(), check, PAST_MONTH_DATE))

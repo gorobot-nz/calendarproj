@@ -7,6 +7,17 @@ class Day {
         this.addClassName = addClassName
     }
 
+    appendChallenge(challenge) {
+
+    }
+
+    removeChallenge(id) {
+    }
+
+    getId() {
+        return `${this.dayMonth}-${this.dayNum}-${this.dayYear}`
+    }
+
     renderDay() {
         const dayTd = document.createElement('td')
         dayTd.className = DAY_VALUES__WEEK__DAY
@@ -24,7 +35,7 @@ class Day {
 
         const dayChallengesContainer = document.createElement('div')
         dayChallengesContainer.className = DAY_VALUES__WEEK__DAY__DAY_INFO__DAY_TASKS
-        
+
         this.challenges.map(challenge => dayChallengesContainer.appendChild(challenge.render()))
 
         dayTd.appendChild(dayNumContainer)
