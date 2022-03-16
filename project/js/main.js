@@ -90,6 +90,10 @@ function calculateDays() {
 
 function render() {
     days = calculateDays(mainDate)
-    console.log(days)
+    calendar.setDays(days)
+    daysTable.innerHTML = ''
+    console.log(calendar.renderCalendar())
+    calendar.renderCalendar().map(item => console.log(daysTable.appendChild(item)))
+        
     currentMonthContainer.innerHTML = `<p>${MONTHS[mainDate.getMonth()]} ${mainDate.getFullYear()}</p>`
 }
