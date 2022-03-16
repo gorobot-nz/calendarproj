@@ -387,13 +387,11 @@ input:checked+.slider:before {
 }
 
 .day-values__week {
-    height: 20%;
     width: 100%;
 }
 
 .day-values__week__day {
     width: calc(100%/7);
-    height: 20%;
     border: 1px var(--border-black) solid;
     cursor: pointer;
 }

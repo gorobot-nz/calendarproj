@@ -15,6 +15,7 @@ const settingsButton = document.querySelector('#settings-button')
 const addChallengeButton = document.querySelector('#add-challenge-button')
 const themeSwitchToggle = document.querySelector('#theme-switch-toggle')
 
+//main objects
 const mainDate = new Date();
 mainDate.setDate(1)
 
@@ -22,6 +23,9 @@ let days = calculateDays(mainDate)
 
 const calendar = new Calendar(days)
 
+render()
+
+//functions
 themeSwitchToggle.onclick = () => {
     body.className === LIGHT_THEME ? body.className = DARK_THEME : body.className = LIGHT_THEME
     console.log(body.className)
@@ -50,15 +54,21 @@ function calculateDays(date) {
         0
     ).getDate();
 
-    const firstDayIndex = date.getDay() - 1;
+    const firstDayIndex = date.getDay();
 
     const lastDayIndex = new Date(
         date.getFullYear(),
         date.getMonth() + 1,
         0
-    ).getDay() - 1;
+    ).getDay();
 
     const nextDays = 7 - lastDayIndex - 1;
+
+    console.log('lastday',lastDay)
+    console.log('prevLastDay',prevLastDay)
+    console.log('firstDayIndex',firstDayIndex)
+    console.log('lastDayIndex',lastDayIndex)
+    console.log('nextDays',nextDays)
 
     const days = new Array()
 
