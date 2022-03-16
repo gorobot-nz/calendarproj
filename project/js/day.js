@@ -9,7 +9,13 @@ class Day {
     renderDay() {
         const dayTd = document.createElement('td')
         dayTd.className = DAY_VALUES__WEEK__DAY
+        if (this.addClassName !== '') {
+            dayTd.classList.add(this.addClassName)
+        }
         dayTd.id = `${this.dayMonth}-${this.dayNum}`
+        dayTd.onclick = (e) => {
+            console.log(e.target)
+        }
 
         const dayNumContainer = document.createElement('div')
         dayNumContainer.className = DAY_VALUES__WEEK__DAY__DAY_INFO__DAY_NUM
@@ -17,7 +23,23 @@ class Day {
 
         const dayChallengesContainer = document.createElement('div')
         dayChallengesContainer.className = DAY_VALUES__WEEK__DAY__DAY_INFO__DAY_TASKS
-        dayChallengesContainer.innerHTML = 'TEST'
+        dayChallengesContainer.innerHTML = `
+            <div class="challenge task">
+                <div class="challenge__inner">
+                    Task
+                </div>
+            </div>
+            <div class="challenge event">
+                <div class="challenge__inner">
+                    Task
+                </div>
+            </div>
+            <div class="challenge reminder">
+                <div class="challenge__inner">
+                    Task
+                </div>
+            </div>
+        `
         dayTd.appendChild(dayNumContainer)
         dayTd.appendChild(dayChallengesContainer)
 

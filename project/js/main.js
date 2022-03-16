@@ -77,8 +77,14 @@ function calculateDays() {
     }
 
     for (let i = 1; i <= lastDay; i++) {
-        days.push(new Day(i, currMonth, []))
-
+        if (
+            i === new Date().getDate() &&
+            mainDate.getMonth() === new Date().getMonth()
+        ){
+            days.push(new Day(i, currMonth, [], CURRENT_DATE))
+        } else{
+            days.push(new Day(i, currMonth, []))
+        }
     }
 
     for (let i = 1; i <= nextDays; i++) {
@@ -94,6 +100,6 @@ function render() {
     daysTable.innerHTML = ''
     console.log(calendar.renderCalendar())
     calendar.renderCalendar().map(item => console.log(daysTable.appendChild(item)))
-        
+
     currentMonthContainer.innerHTML = `<p>${MONTHS[mainDate.getMonth()]} ${mainDate.getFullYear()}</p>`
 }
