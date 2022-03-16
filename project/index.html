@@ -24,7 +24,7 @@
                 <button id="prev-month-button" class="round-btn shadow">
                     <ion-icon class="button-content" name="arrow-back-outline"></ion-icon>
                 </button>
-                <div class="header__date-container__month-container shadow">
+                <div id="currnet-month-container" class="header__date-container__month-container shadow">
                     <p>Prev</p>
                 </div>
                 <button id="next-month-button" class="round-btn shadow">
@@ -34,10 +34,10 @@
             <div class="header__settings-container">
                 <label class="switch">
                     <input type="checkbox">
-                    <span class="slider round"></span>
+                    <span id="theme-switch-toggle" class="slider round"></span>
                 </label>
                 <div class="settings">
-                    <button class="round-btn shadow">
+                    <button id="settings-button" class="round-btn shadow">
                         <ion-icon class="button-content" name="settings-outline"></ion-icon>
                     </button>
                 </div>
@@ -47,10 +47,10 @@
     <main class="main">
         <div class="container">
             <section class="user-container">
-                <div class="user-container__avatar-container">
+                <div id="user-avatar-container" class="user-container__avatar-container">
                     <img class="shadow" id="user-avatar" src="./img/c46888f9135c3b440f5d9060a345b35e.png">
                 </div>
-                <div class="user-container__user-challenges-container">
+                <div id="user-challenges-container" class="user-container__user-challenges-container">
                     <div class="user-container__user-challenges-container__user-chalenges shadow">
                         <div class="challenge task shadow">
                             <div class="challenge__inner">
@@ -70,13 +70,13 @@
                     </div>
                 </div>
                 <div class="user-container__button-container">
-                    <button class="wide-btn shadow">
+                    <button id="add-challenge-button" class="wide-btn shadow">
                         <ion-icon class="button-content" name="add-outline"></ion-icon>
                     </button>
                 </div>
             </section>
             <section class="calendar-container">
-                <table id="days-table" class="calendar-container__days">
+                <table class="calendar-container__days">
                     <thead class="day-names">
                         <tr>
                             <th class="day-names__day">Monday</th>
@@ -88,11 +88,13 @@
                             <th class="day-names__day">Sunday</th>
                         </tr>
                     </thead>
-                    <tbody class="day-values">
+                    <tbody id="days-table" class="day-values">
                         <tr id='1' class="day-values__week">
-                            <td class="day-values__week__day">Day</td>
-                            <td class="day-values__week__day">Day</td>
-                            <td class="day-values__week__day">
+                            <td class="day-values__week__day past-month-date">
+                                Day
+                            </td>
+                            <td class="day-values__week__day past-month-date">Day</td>
+                            <td class="day-values__week__day past-month-date">
                                 <div class="day-values__week__day__day-info__day-num">
                                     <p>15</p>
                                 </div>
@@ -184,7 +186,7 @@
                             <td class="day-values__week__day">Day</td>
                             <td class="day-values__week__day">Day</td>
                             <td class="day-values__week__day">Day</td>
-                            <td class="day-values__week__day">
+                            <td class="day-values__week__day current-date">
                                 <div class="day-values__week__day__day-info__day-num">
                                     <p>15</p>
                                 </div>
@@ -236,16 +238,20 @@
                             </td>
                             <td class="day-values__week__day">Day</td>
                             <td class="day-values__week__day next-month-date">Day</td>
-                            <td class="day-values__week__day next-month-date">Day</td>
-                            <td class="day-values__week__day next-month-date">Day</td>
-                            <td class="day-values__week__day next-month-date">Day</td>
+                            <td class="day-values__week__day next-month-date next-month-date">Day</td>
+                            <td class="day-values__week__day next-month-date next-month-date">Day</td>
+                            <td class="day-values__week__day next-month-date next-month-date">Day</td>
                         </tr>
                     </tbody>
                 </table>
             </section>
         </div>
     </main>
-    <script src="./main.js"></script>
+    <script src="./js/consts.js"></script>
+    <script src="./js/challenges.js"></script>
+    <script src="./js/day.js"></script>
+    <script src="./js/calendar.js"></script>
+    <script src="./js/main.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
