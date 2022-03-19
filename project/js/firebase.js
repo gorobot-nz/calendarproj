@@ -27,18 +27,17 @@ class Firebase {
         }).then(resp => console.log(resp.json()))
     }
 
-    static getChallenges(username, month) {
+    static async getChallenges(username, month) {
 
-        const [monthNum, dayNum, year] = month.split('-')
+        const [monthName, year] = month.split('-')
 
-
-        fetch(`${FIREBASE_URL}/${username}/${year}/${monthNum}.json`, {
+        const responce = await fetch(`${FIREBASE_URL}/${username}/${year}/${monthName}.json`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-            .then(resp => resp.json())
-            .then(data => console.log(data))
+        const data = await responce.json()
+        return data
     }
 }

@@ -76,7 +76,7 @@ class Form {
         return formGroup
     }
 
-    renderForm(type) {
+    renderForm(type, render) {
         const form = document.createElement('form')
         form.className = 'modal-form'
         form.id = 'modal-form'
@@ -118,6 +118,7 @@ class Form {
             }
 
             Firebase.postChallenge(user, date, info)
+            render()
         }
 
         return form

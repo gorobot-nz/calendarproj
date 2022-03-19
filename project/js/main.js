@@ -26,12 +26,12 @@ const reminderBtn = modalLayout.querySelector('#reminder-btn')
 const form = new Form(false)
 
 //main objects
+const daysStore = new Map()
 const mainDate = new Date();
 mainDate.setDate(1)
 let days = calculateDays()
 const calendar = new Calendar(days)
 
-const daysStore = new Map()
 
 render()
 
@@ -39,19 +39,19 @@ render()
 eventBtn.onclick = () => {
     const formContainer = modalLayout.querySelector('#form-container')
     formContainer.innerHTML = ''
-    formContainer.appendChild(form.renderForm(EVENT))
+    formContainer.appendChild(form.renderForm(EVENT, render))
 }
 
 taskBtn.onclick = () => {
     const formContainer = modalLayout.querySelector('#form-container')
     formContainer.innerHTML = ''
-    formContainer.appendChild(form.renderForm(TASK))
+    formContainer.appendChild(form.renderForm(TASK, render))
 }
 
 reminderBtn.onclick = () => {
     const formContainer = modalLayout.querySelector('#form-container')
     formContainer.innerHTML = ''
-    formContainer.appendChild(form.renderForm(REMINDER))
+    formContainer.appendChild(form.renderForm(REMINDER, render))
 }
 
 addChallengeButton.onclick = () => {
@@ -59,7 +59,7 @@ addChallengeButton.onclick = () => {
 
     const formContainer = modalLayout.querySelector('#form-container')
     formContainer.innerHTML = ''
-    formContainer.appendChild(form.renderForm(REMINDER))
+    formContainer.appendChild(form.renderForm(REMINDER, render))
 }
 
 modalLayout.onclick = (e) => {
@@ -74,11 +74,15 @@ themeSwitchToggle.onclick = () => {
 
 nextMonthButton.onclick = () => {
     mainDate.setMonth(mainDate.getMonth() + 1);
+    const selectedMonth = `${MONTHS[mainDate.getMonth()]}-${mainDate.getFullYear()}`
+    localStorage.setItem('selectedMonth', selectedMonth)
     render()
 }
 
 prevMonthButton.onclick = () => {
     mainDate.setMonth(mainDate.getMonth() - 1);
+    const selectedMonth = `${MONTHS[mainDate.getMonth()]}-${mainDate.getFullYear()}`
+    localStorage.setItem('selectedMonth', selectedMonth)
     render()
 }
 
@@ -114,40 +118,73 @@ function calculateDays() {
     const nextMonth = MONTHS[mainDate.getMonth()];
     mainDate.setMonth(mainDate.getMonth() - 1)
 
-    const check = [new CalendarEvent(1, 'bruh', '12121', 'bububub', false), new CalendarTask(2, 'bruh', '12121', 'bububub'), new CalendarReminder(3, 'bruh', '12121')]
-
     for (let i = firstDayIndex; i > 0; i--) {
-        days.push(new Day(prevLastDay - i + 1, prevMonth, mainDate.getFullYear(), check, PAST_MONTH_DATE))
+        const challenges = daysStore.get(`${MONTHS[mainDate.getMonth()]}-${i}-${mainDate.getFullYear()}`)
+
+        days.push(new Day(prevLastDay - i + 1, prevMonth, mainDate.getFullYear(), challenges, PAST_MONTH_DATE))
     }
 
     for (let i = 1; i <= lastDay; i++) {
+        const challenges = daysStore.get(`${MONTHS[mainDate.getMonth()]}-${i}-${mainDate.getFullYear()}`)
         if (
             i === new Date().getDate() &&
             mainDate.getMonth() === new Date().getMonth()
         ) {
-            days.push(new Day(i, currMonth, mainDate.getFullYear(), check, CURRENT_DATE))
+            days.push(new Day(i, currMonth, mainDate.getFullYear(), challenges, CURRENT_DATE))
         } else {
-            days.push(new Day(i, currMonth, mainDate.getFullYear(), []))
+            days.push(new Day(i, currMonth, mainDate.getFullYear(), challenges))
         }
     }
 
     for (let i = 1; i <= nextDays; i++) {
-        days.push(new Day(i, nextMonth, mainDate.getFullYear(), [], NEXT_MONTH_DATE))
+        const challenges = daysStore.get(`${MONTHS[mainDate.getMonth()]}-${i}-${mainDate.getFullYear()}`)
+        days.push(new Day(i, nextMonth, mainDate.getFullYear(), challenges, NEXT_MONTH_DATE))
     }
 
     return days
 }
 
-function render() {
+async function render() {
+    const user = localStorage.getItem('user')
+    const month = localStorage.getItem('selectedMonth')
+    const temp = await Firebase.getChallenges(user, month)
+
+    const [monthName, year] = month.split('-')
+
+    try {
+        Object.keys(temp)?.map(key => {
+            daysStore.set(`${monthName}-${key}-${year}`, getChallenges(temp[key]))
+        });
+    } catch (e) {
+        console.log('nope')
+    }
+
     days = calculateDays(mainDate)
     calendar.setDays(days)
     daysTable.innerHTML = ''
     calendar.renderCalendar(renderCurrentDayChallenges).map(item => daysTable.appendChild(item))
-
     currentMonthContainer.innerHTML = `<p>${MONTHS[mainDate.getMonth()]} ${mainDate.getFullYear()}</p>`
+    console.log(daysStore)
+}
+
+function getChallenges(challengesObject) {
+    const challengesArray = Object.keys(challengesObject).map(key => {
+        return parseObjectToChallenge(key, challengesObject[key])
+    })
+    return challengesArray
+}
+
+function parseObjectToChallenge(key, value) {
+    if (value.type === REMINDER) {
+        return new CalendarReminder(key, value.title)
+    } else if (value.type === TASK) {
+        return new CalendarTask(key, value.title, value.description)
+    } else {
+        return new CalendarEvent(key, value.title, value.description, value.period)
+    }
 }
 
 function renderCurrentDayChallenges(challenges) {
     userChallengesContainer.innerHTML = ''
-    challenges.map(challenge => userChallengesContainer.appendChild(challenge.render()))
+    challenges?.map(challenge => userChallengesContainer.appendChild(challenge.render()))
 }

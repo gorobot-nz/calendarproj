@@ -44,7 +44,7 @@ class Day {
         let taskCounter = 0
         let reminderCounter = 0
 
-        this.challenges.forEach(challenge => {
+        this.challenges?.forEach(challenge => {
             if (challenge instanceof CalendarTask) {
                 taskCounter++
             } else if (challenge instanceof CalendarEvent) {
