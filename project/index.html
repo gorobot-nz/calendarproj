@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./styles.css">
+    <link rel="icon" href="./img/calendar-sharp.svg">
     <title>Calendar</title>
 </head>
 
@@ -97,12 +98,39 @@
     </main>
     <div id="modal-layout" class="hidden-layout">
         <div class="modal-layout__modal">
+            <div id="modal-header" class="modal-header">
+                <button id="event-btn" class="modal-btn">Event</button>
+                <button id="task-btn" class="modal-btn">Task</button>
+                <button id="reminder-btn" class="modal-btn">Reminder</button>
+            </div>
+            <div id="form-container" class="form-container">
+                <form id="modal-form" class="modal-form">
+                    <div class="form-group">
+                        <label for="title">Напоминание</label>
+                        <input type="text" id="title" placeholder="Что вам напомнить?">
+                    </div>
+                    <div class="form-group">
+                        <label for="details">Детали</label>
+                        <textarea id="details" rows="2" cols="15"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="period">Периодичность</label>
+                        <select id="period">
+                            <option value="false">No</option>
+                            <option value="true">Yes</option>
+                        </select>
+                    </div>
+                    <input class="wide-btn shadow" type="submit" value="Send">
+                </form>
+            </div>
         </div>
     </div>
     <script src="./js/consts.js"></script>
+    <script src="./js/firebase.js"></script>
     <script src="./js/challenges.js"></script>
     <script src="./js/day.js"></script>
     <script src="./js/calendar.js"></script>
+    <script src="./js/form.js"></script>
     <script src="./js/main.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

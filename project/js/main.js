@@ -15,6 +15,16 @@ const settingsButton = document.querySelector('#settings-button')
 const addChallengeButton = document.querySelector('#add-challenge-button')
 const themeSwitchToggle = document.querySelector('#theme-switch-toggle')
 
+//modal
+const modalLayout = document.querySelector('#modal-layout')
+
+const eventBtn = modalLayout.querySelector('#event-btn')
+const taskBtn = modalLayout.querySelector('#task-btn')
+const reminderBtn = modalLayout.querySelector('#reminder-btn')
+
+//forms
+const form = new Form(false)
+
 //main objects
 const mainDate = new Date();
 mainDate.setDate(1)
@@ -26,6 +36,34 @@ const daysStore = new Map()
 render()
 
 //functions
+eventBtn.onclick = () => {
+    const formContainer = modalLayout.querySelector('#form-container')
+    formContainer.innerHTML = ''
+    formContainer.appendChild(form.renderForm(EVENT))
+}
+
+taskBtn.onclick = () => {
+    const formContainer = modalLayout.querySelector('#form-container')
+    formContainer.innerHTML = ''
+    formContainer.appendChild(form.renderForm(TASK))
+}
+
+reminderBtn.onclick = () => {
+    const formContainer = modalLayout.querySelector('#form-container')
+    formContainer.innerHTML = ''
+    formContainer.appendChild(form.renderForm(REMINDER))
+}
+
+addChallengeButton.onclick = () => {
+    modalLayout.className = 'modal-layout'
+}
+
+modalLayout.onclick = (e) => {
+    if (e.target.id === 'modal-layout') {
+        modalLayout.className = 'hidden-layout'
+    }
+}
+
 themeSwitchToggle.onclick = () => {
     body.className === LIGHT_THEME ? body.className = DARK_THEME : body.className = LIGHT_THEME
 }

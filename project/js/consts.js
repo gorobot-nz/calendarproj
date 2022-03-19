@@ -30,5 +30,6 @@ const EVENT = 'event'
 const TASK = 'task'
 const REMINDER = 'reminder'
 
-
 const CHALLENGE__INNER = 'challenge__inner'
+
+FIREBASE_URL = 'https://calendar-a0a30-default-rtdb.europe-west1.firebasedatabase.app'

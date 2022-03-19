@@ -3,6 +3,7 @@ class Day {
         this.dayNum = dayNum
         this.dayMonth = dayMonth
         this.dayYear = dayYear
+        this.id = `${dayMonth}-${dayNum}-${dayYear}`
         this.challenges = challenges
         this.addClassName = addClassName
     }
@@ -12,10 +13,6 @@ class Day {
     }
 
     removeChallenge(id) {
-    }
-
-    getId() {
-        return `${this.dayMonth}-${this.dayNum}-${this.dayYear}`
     }
 
     renderDay() {

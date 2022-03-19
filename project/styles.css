@@ -20,7 +20,7 @@
     --border-black: black;
 }
 
-.hidden-layout{
+.hidden-layout {
     display: none;
 }
 
@@ -74,25 +74,6 @@ body {
     flex-direction: row;
     height: 100%;
     width: 100%;
-}
-
-.modal-layout {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-}
-
-.modal-layout__modal {
-    margin: auto;
-    width: 80%;
-    height: 80%;
-    border: 5px solid var(--border-black);
-    background-color: var(--whitesmoke);
-    border-radius: 50px;
 }
 
 .btn {
@@ -191,6 +172,115 @@ body {
 
 .shadow {
     box-shadow: 3px 3px gray;
+}
+
+
+
+.modal-layout {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+}
+
+.modal-layout__modal {
+    margin: auto;
+    width: 80%;
+    height: 80%;
+    background-color: var(--whitesmoke);
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 30px;
+    height: 50px;
+    width: 100%;
+}
+
+.form-container{
+    margin-top: 50px;
+}
+
+.modal-btn {
+    margin: auto;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    height: 30px;
+    font-family: 'Ubuntu';
+}
+
+.modal-btn:hover {
+    background-color: var(--task-grey);
+    color: white;
+}
+
+.modal-btn:focus {
+    background-color: var(--task-grey);
+    color: white;
+}
+
+.modal-btn:active {
+    background-color: #1f2127;
+    color: white;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 70%;
+    overflow-y: auto;
+}
+
+.form-group {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    color: #86898f;
+    margin: 0;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    background: transparent;
+    border-bottom: 1px solid #ccc;
+    color: #000;
+    padding: 15px 0 10px;
+    outline: none;
+    font-family: inherit;
+}
+
+.form-group select {
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    background: transparent;
+    border-bottom: 1px solid #ccc;
+    color: #000;
+    padding: 15px 0 10px;
+    outline: none;
+    font-family: inherit;
+}
+
+.modal-form .wide-btn {
+    margin-top: 15px;
 }
 
 .header__button-container {
