@@ -189,7 +189,7 @@ body {
 .modal-layout__modal {
     margin: auto;
     width: 80%;
-    height: 80%;
+    height: 60%;
     background-color: var(--whitesmoke);
     border-radius: 50px;
     display: flex;

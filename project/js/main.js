@@ -56,6 +56,10 @@ reminderBtn.onclick = () => {
 
 addChallengeButton.onclick = () => {
     modalLayout.className = 'modal-layout'
+
+    const formContainer = modalLayout.querySelector('#form-container')
+    formContainer.innerHTML = ''
+    formContainer.appendChild(form.renderForm(REMINDER))
 }
 
 modalLayout.onclick = (e) => {
@@ -110,7 +114,7 @@ function calculateDays() {
     const nextMonth = MONTHS[mainDate.getMonth()];
     mainDate.setMonth(mainDate.getMonth() - 1)
 
-    const check = [new CalendarEvent(1, 'bruh', '12121', false, 'bububub'), new CalendarTask(2, 'bruh', '12121', 'bububub'), new CalendarReminder(3, 'bruh', '12121')]
+    const check = [new CalendarEvent(1, 'bruh', '12121', 'bububub', false), new CalendarTask(2, 'bruh', '12121', 'bububub'), new CalendarReminder(3, 'bruh', '12121')]
 
     for (let i = firstDayIndex; i > 0; i--) {
         days.push(new Day(prevLastDay - i + 1, prevMonth, mainDate.getFullYear(), check, PAST_MONTH_DATE))
@@ -138,7 +142,12 @@ function render() {
     days = calculateDays(mainDate)
     calendar.setDays(days)
     daysTable.innerHTML = ''
-    calendar.renderCalendar().map(item => daysTable.appendChild(item))
+    calendar.renderCalendar(renderCurrentDayChallenges).map(item => daysTable.appendChild(item))
 
     currentMonthContainer.innerHTML = `<p>${MONTHS[mainDate.getMonth()]} ${mainDate.getFullYear()}</p>`
+}
+
+function renderCurrentDayChallenges(challenges) {
+    userChallengesContainer.innerHTML = ''
+    challenges.map(challenge => userChallengesContainer.appendChild(challenge.render()))
 }

@@ -51,8 +51,9 @@
                 <div id="user-avatar-container" class="user-container__avatar-container">
                     <img class="shadow" id="user-avatar" src="./img/c46888f9135c3b440f5d9060a345b35e.png">
                 </div>
-                <div id="user-challenges-container" class="user-container__user-challenges-container">
-                    <div class="user-container__user-challenges-container__user-chalenges shadow">
+                <div class="user-container__user-challenges-container">
+                    <div id="user-challenges-container"
+                        class="user-container__user-challenges-container__user-chalenges shadow">
                         <div class="challenge task shadow">
                             <div class="challenge__inner">
                                 Task
@@ -104,24 +105,7 @@
                 <button id="reminder-btn" class="modal-btn">Reminder</button>
             </div>
             <div id="form-container" class="form-container">
-                <form id="modal-form" class="modal-form">
-                    <div class="form-group">
-                        <label for="title">Напоминание</label>
-                        <input type="text" id="title" placeholder="Что вам напомнить?">
-                    </div>
-                    <div class="form-group">
-                        <label for="details">Детали</label>
-                        <textarea id="details" rows="2" cols="15"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="period">Периодичность</label>
-                        <select id="period">
-                            <option value="false">No</option>
-                            <option value="true">Yes</option>
-                        </select>
-                    </div>
-                    <input class="wide-btn shadow" type="submit" value="Send">
-                </form>
+                <!-- Render modal -->
             </div>
         </div>
     </div>

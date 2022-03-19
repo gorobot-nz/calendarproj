@@ -7,7 +7,7 @@ class Calendar {
         this.days = days
     }
 
-    renderCalendar() {
+    renderCalendar(renderCurrentDayChallenges) {
         const calendar = new Array()
 
         const weeksCount = this.days.length / 7
@@ -16,7 +16,7 @@ class Calendar {
             week.id = i
             week.className = DAY_VALUES__WEEK
             for (let j = 0; j < 7; j++) {
-                week.appendChild(this.days[7 * i + j].renderDay())
+                week.appendChild(this.days[7 * i + j].renderDay(renderCurrentDayChallenges))
             }
             calendar.push(week)
         }

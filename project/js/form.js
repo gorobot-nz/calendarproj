@@ -62,8 +62,8 @@ class Form {
         trueOption.innerHTML = 'Yes'
 
         const falseOption = document.createElement('option')
-        trueOption.value = 'false'
-        trueOption.innerHTML = 'No'
+        falseOption.value = 'false'
+        falseOption.innerHTML = 'No'
 
         selector.appendChild(falseOption)
         selector.appendChild(trueOption)

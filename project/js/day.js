@@ -15,7 +15,7 @@ class Day {
     removeChallenge(id) {
     }
 
-    renderDay() {
+    renderDay(renderCurrentDayChallenges) {
         const dayTd = document.createElement('td')
         dayTd.className = DAY_VALUES__WEEK__DAY
         if (this.addClassName !== '') {
@@ -23,7 +23,7 @@ class Day {
         }
         dayTd.id = `${this.dayMonth}-${this.dayNum}-${this.dayYear}`
         dayTd.onclick = (e) => {
-            console.log(e.target)
+            renderCurrentDayChallenges(this.challenges)
         }
 
         const dayNumContainer = document.createElement('div')
