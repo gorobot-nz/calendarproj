@@ -1,6 +1,6 @@
 class Firebase {
 
-    static postChallenge(username, day, content) {
+    static postChallenge(username, day, info) {
         const [month, dayNum, year] = day.split('-')
 
         console.log(month)
@@ -10,7 +10,7 @@ class Firebase {
         fetch(`${FIREBASE_URL}/${username}/${year}/${month}/${dayNum}.json`, {
             method: 'POST',
             body: JSON.stringify({
-                content
+                ...info
             }),
             headers: {
                 'Content-Type': 'application/json'

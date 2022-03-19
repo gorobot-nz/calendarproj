@@ -32,10 +32,10 @@ class Form {
         formGroup.className = 'form-group'
 
         const label = document.createElement('label')
-        label.innerHTML = 'Details'
+        label.innerHTML = 'Description'
 
         const input = document.createElement('textarea')
-        input.id = 'details'
+        input.id = 'description'
         input.rows = 2
         input.cols = 15
 
@@ -96,6 +96,30 @@ class Form {
         submitButton.value = 'Send'
 
         form.appendChild(submitButton)
+
+        form.onsubmit = (event) => {
+            event.preventDefault()
+            const date = localStorage.getItem('selectedDay')
+            const user = localStorage.getItem('user')
+
+            const title = form.querySelector('#title').value
+            const info = { title }
+
+            if (form.querySelector('#description') === null) {
+                info['type'] = REMINDER
+            } else {
+                info['description'] = form.querySelector('#description').value
+                if (form.querySelector('#period') === null) {
+                    info['type'] = TASK
+                } else {
+                    info['type'] = EVENT
+                    info['period'] = form.querySelector('#period').value
+                }
+            }
+
+            Firebase.postChallenge(user, date, info)
+        }
+
         return form
     }
 }

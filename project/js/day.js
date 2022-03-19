@@ -8,11 +8,17 @@ class Day {
         this.addClassName = addClassName
     }
 
-    appendChallenge(challenge) {
+    renderCountOfChallenges(type, count) {
+        const challenge = document.createElement('div')
+        challenge.className = CHALLENGE
+        challenge.classList.add(type)
 
-    }
+        const challengeInner = document.createElement('div')
+        challengeInner.className = CHALLENGE__INNER
+        challengeInner.innerHTML = `${count} ${type}`
 
-    removeChallenge(id) {
+        challenge.appendChild(challengeInner)
+        return challenge
     }
 
     renderDay(renderCurrentDayChallenges) {
@@ -22,8 +28,9 @@ class Day {
             dayTd.classList.add(this.addClassName)
         }
         dayTd.id = `${this.dayMonth}-${this.dayNum}-${this.dayYear}`
-        dayTd.onclick = (e) => {
+        dayTd.onclick = () => {
             renderCurrentDayChallenges(this.challenges)
+            localStorage.setItem('selectedDay', this.id)
         }
 
         const dayNumContainer = document.createElement('div')
@@ -33,7 +40,29 @@ class Day {
         const dayChallengesContainer = document.createElement('div')
         dayChallengesContainer.className = DAY_VALUES__WEEK__DAY__DAY_INFO__DAY_TASKS
 
-        this.challenges.map(challenge => dayChallengesContainer.appendChild(challenge.render()))
+        let eventCounter = 0
+        let taskCounter = 0
+        let reminderCounter = 0
+
+        this.challenges.forEach(challenge => {
+            if (challenge instanceof CalendarTask) {
+                taskCounter++
+            } else if (challenge instanceof CalendarEvent) {
+                eventCounter++
+            } else {
+                reminderCounter++
+            }
+        });
+
+        if (eventCounter !== 0) {
+            dayChallengesContainer.appendChild(this.renderCountOfChallenges(EVENT, eventCounter))
+        }
+        if (taskCounter !== 0) {
+            dayChallengesContainer.appendChild(this.renderCountOfChallenges(TASK, taskCounter))
+        }
+        if (reminderCounter !== 0) {
+            dayChallengesContainer.appendChild(this.renderCountOfChallenges(REMINDER, reminderCounter))
+        }
 
         dayTd.appendChild(dayNumContainer)
         dayTd.appendChild(dayChallengesContainer)
