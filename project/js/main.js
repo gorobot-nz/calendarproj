@@ -29,6 +29,10 @@ const form = new Form(false)
 localStorage.removeItem('selectedDay')
 localStorage.removeItem('selectedMonth')
 
+if(!localStorage.getItem('user')){
+    alert('Enter your username in settings')
+}
+
 //main objects
 const daysStore = new Map()
 const mainDate = new Date();
