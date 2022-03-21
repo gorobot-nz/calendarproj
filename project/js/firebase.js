@@ -1,13 +1,9 @@
 class Firebase {
 
-    static postChallenge(username, day, info) {
+    static async postChallenge(username, day, info) {
         const [month, dayNum, year] = day.split('-')
 
-        console.log(month)
-        console.log(dayNum)
-        console.log(year)
-
-        fetch(`${FIREBASE_URL}/${username}/${year}/${month}/${dayNum}.json`, {
+        await fetch(`${FIREBASE_URL}/${username}/${year}/${month}/${dayNum}.json`, {
             method: 'POST',
             body: JSON.stringify({
                 ...info
@@ -18,13 +14,15 @@ class Firebase {
         }).then(resp => console.log(resp.json()))
     }
 
-    static deleteChallenge(username, year, month, day, id) {
-        fetch(`${FIREBASE_URL}${username}/${day}/${id}.json`, {
+    static async deleteChallenge(username, day, id) {
+        const [month, dayNum, year] = day.split('-')
+
+        await fetch(`${FIREBASE_URL}/${username}/${year}/${month}/${dayNum}/${id}.json`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(resp => console.log(resp.json()))
+        })
     }
 
     static async getChallenges(username, month) {
@@ -39,5 +37,19 @@ class Firebase {
         })
         const data = await responce.json()
         return data
+    }
+
+    static async putChallenge(username, day, id, info) {
+        const [month, dayNum, year] = day.split('-')
+
+        await fetch(`${FIREBASE_URL}/${username}/${year}/${month}/${dayNum}/${id}.json`, {
+            method: 'PUT',
+            body: JSON.stringify({
+                ...info
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(resp => console.log(resp.json()))
     }
 }

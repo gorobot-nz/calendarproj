@@ -17,6 +17,7 @@ const themeSwitchToggle = document.querySelector('#theme-switch-toggle')
 
 //modal
 const modalLayout = document.querySelector('#modal-layout')
+const modalHeader = document.querySelector('#modal-header')
 
 const eventBtn = modalLayout.querySelector('#event-btn')
 const taskBtn = modalLayout.querySelector('#task-btn')
@@ -25,13 +26,15 @@ const reminderBtn = modalLayout.querySelector('#reminder-btn')
 //forms
 const form = new Form(false)
 
+localStorage.removeItem('selectedDay')
+localStorage.removeItem('selectedMonth')
+
 //main objects
 const daysStore = new Map()
 const mainDate = new Date();
 mainDate.setDate(1)
 let days = calculateDays()
 const calendar = new Calendar(days)
-
 
 render()
 
@@ -56,6 +59,8 @@ reminderBtn.onclick = () => {
 
 addChallengeButton.onclick = () => {
     modalLayout.className = 'modal-layout'
+    modalHeader.className = 'modal-header'
+    form.setIsEdit(false)
 
     const formContainer = modalLayout.querySelector('#form-container')
     formContainer.innerHTML = ''
@@ -65,6 +70,7 @@ addChallengeButton.onclick = () => {
 modalLayout.onclick = (e) => {
     if (e.target.id === 'modal-layout') {
         modalLayout.className = 'hidden-layout'
+        localStorage.removeItem('id')
     }
 }
 
@@ -72,21 +78,33 @@ themeSwitchToggle.onclick = () => {
     body.className === LIGHT_THEME ? body.className = DARK_THEME : body.className = LIGHT_THEME
 }
 
-nextMonthButton.onclick = () => {
+nextMonthButton.onclick = async () => {
     mainDate.setMonth(mainDate.getMonth() + 1);
     const selectedMonth = `${MONTHS[mainDate.getMonth()]}-${mainDate.getFullYear()}`
     localStorage.setItem('selectedMonth', selectedMonth)
-    render()
+    await render()
 }
 
-prevMonthButton.onclick = () => {
+prevMonthButton.onclick = async () => {
     mainDate.setMonth(mainDate.getMonth() - 1);
     const selectedMonth = `${MONTHS[mainDate.getMonth()]}-${mainDate.getFullYear()}`
     localStorage.setItem('selectedMonth', selectedMonth)
-    render()
+    await render()
+}
+
+settingsButton.onclick = () => {
+    modalLayout.className = 'modal-layout'
+    modalHeader.className = 'hidden-layout'
+
+    const formContainer = modalLayout.querySelector('#form-container')
+    formContainer.innerHTML = ''
+    formContainer.appendChild(form.renderSettingsForm(render))
 }
 
 function calculateDays() {
+    const selectedMonth = `${MONTHS[mainDate.getMonth()]}-${mainDate.getFullYear()}`
+    localStorage.setItem('selectedMonth', selectedMonth)
+
     const lastDay = new Date(
         mainDate.getFullYear(),
         mainDate.getMonth() + 1,
@@ -145,6 +163,7 @@ function calculateDays() {
 }
 
 async function render() {
+    daysStore.clear()
     const user = localStorage.getItem('user')
     const month = localStorage.getItem('selectedMonth')
     const temp = await Firebase.getChallenges(user, month)
@@ -186,5 +205,27 @@ function parseObjectToChallenge(key, value) {
 
 function renderCurrentDayChallenges(challenges) {
     userChallengesContainer.innerHTML = ''
-    challenges?.map(challenge => userChallengesContainer.appendChild(challenge.render()))
+    challenges?.map(challenge => userChallengesContainer.appendChild(challenge.render(onChallengeClick)))
+}
+
+function onChallengeClick(formType, title, description = '', period = '') {
+    modalLayout.className = 'modal-layout'
+    modalHeader.className = 'hidden-layout'
+    form.setIsEdit(true)
+
+    const formContainer = modalLayout.querySelector('#form-container')
+    formContainer.innerHTML = ''
+    formContainer.appendChild(form.renderForm(formType, render))
+
+    const titleInput = document.querySelector('#title')
+    const descriptionInput = document.querySelector('#description')
+    const periodInput = document.querySelector('#period')
+
+    titleInput.value = title
+    if (descriptionInput) {
+        descriptionInput.value = description
+    }
+    if (periodInput) {
+        periodInput.value = period
+    }
 }

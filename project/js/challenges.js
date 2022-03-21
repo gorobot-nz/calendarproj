@@ -24,10 +24,15 @@ class CalendarEvent extends Challenge {
         this.period = period
     }
 
-    render() {
+    render(onChallengeClick) {
         const challenge = super.render()
         challenge.id = `${this.id}-event`
         challenge.classList.add(EVENT)
+
+        challenge.onclick = () => {
+            onChallengeClick(EVENT, this.name, this.description, this.period)
+            localStorage.setItem('id', this.id)
+        }
         return challenge
     }
 }
@@ -38,10 +43,15 @@ class CalendarTask extends Challenge {
         this.description = description
     }
 
-    render() {
+    render(onChallengeClick) {
         const challenge = super.render()
         challenge.id = `${this.id}-task`
         challenge.classList.add(TASK)
+
+        challenge.onclick = () => {
+            onChallengeClick(TASK, this.name, this.description)
+            localStorage.setItem('id', this.id)
+        }
         return challenge
     }
 }
@@ -51,10 +61,15 @@ class CalendarReminder extends Challenge {
         super(id, name)
     }
 
-    render() {
+    render(onChallengeClick) {
         const challenge = super.render()
         challenge.id = `${this.id}-reminder`
         challenge.classList.add(REMINDER)
+
+        challenge.onclick = () => {
+            onChallengeClick(REMINDER, this.name)
+            localStorage.setItem('id', this.id)
+        }
         return challenge
     }
 }

@@ -31,7 +31,6 @@
 
 .dark-theme {
     background-color: var(--darktheme-black);
-    color: white;
 }
 
 body {
