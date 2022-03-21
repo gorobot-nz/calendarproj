@@ -28,6 +28,7 @@ const form = new Form(false)
 
 localStorage.removeItem('selectedDay')
 localStorage.removeItem('selectedMonth')
+localStorage.removeItem('id')
 
 if(!localStorage.getItem('user')){
     alert('Enter your username in settings')
