@@ -30,7 +30,7 @@ localStorage.removeItem('selectedDay')
 localStorage.removeItem('selectedMonth')
 localStorage.removeItem('id')
 
-if(!localStorage.getItem('user')){
+if (!localStorage.getItem('user')) {
     alert('Enter your username in settings')
 }
 
@@ -188,7 +188,11 @@ async function render() {
     daysTable.innerHTML = ''
     calendar.renderCalendar(renderCurrentDayChallenges).map(item => daysTable.appendChild(item))
     currentMonthContainer.innerHTML = `<p>${MONTHS[mainDate.getMonth()]} ${mainDate.getFullYear()}</p>`
-    console.log(daysStore)
+
+
+    const currentDayChallenges = daysStore.get(localStorage.getItem('selectedDay'))
+    userChallengesContainer.innerHTML = ''
+    currentDayChallenges?.map(challenge => userChallengesContainer.appendChild(challenge.render(onChallengeClick)))
 }
 
 function getChallenges(challengesObject) {
