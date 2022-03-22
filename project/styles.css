@@ -532,6 +532,7 @@ input:checked+.slider:before {
 
 p {
     margin: auto;
+    align-items: center;
 }
 
 @media screen and (max-width: 1200px) {

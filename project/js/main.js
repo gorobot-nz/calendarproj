@@ -191,8 +191,10 @@ async function render() {
 
 
     const currentDayChallenges = daysStore.get(localStorage.getItem('selectedDay'))
-    userChallengesContainer.innerHTML = ''
-    currentDayChallenges?.map(challenge => userChallengesContainer.appendChild(challenge.render(onChallengeClick)))
+    if (currentDayChallenges) {
+        userChallengesContainer.innerHTML = ''
+        currentDayChallenges?.map(challenge => userChallengesContainer.appendChild(challenge.render(onChallengeClick)))
+    }
 }
 
 function getChallenges(challengesObject) {
