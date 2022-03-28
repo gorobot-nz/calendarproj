@@ -108,7 +108,7 @@ class Form {
                 const day = localStorage.getItem('selectedDay')
                 const id = localStorage.getItem('id')
                 await Firebase.deleteChallenge(user, day, id)
-                console.log(this.isEdit)
+                alert('Deleted')
                 await render()
             }
             form.appendChild(deleteButton)
@@ -137,8 +137,10 @@ class Form {
             if (this.isEdit) {
                 const id = localStorage.getItem('id')
                 await Firebase.putChallenge(user, date, id, info)
+                alert('Updated')
             } else {
                 await Firebase.postChallenge(user, date, info)
+                alert('Created')
             }
             await render()
         }

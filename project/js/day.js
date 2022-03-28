@@ -15,7 +15,7 @@ class Day {
 
         const challengeInner = document.createElement('div')
         challengeInner.className = CHALLENGE__INNER
-        challengeInner.innerHTML = `${count} ${type}`
+        challengeInner.innerHTML = `${count} ${type}${count === 1 ? '':'s'}`
 
         challenge.appendChild(challengeInner)
         return challenge
