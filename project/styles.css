@@ -173,8 +173,6 @@ body {
     box-shadow: 3px 3px gray;
 }
 
-
-
 .modal-layout {
     position: fixed;
     top: 0;
@@ -415,6 +413,11 @@ input:checked+.slider:before {
     border-radius: 50%;
 }
 
+.user-container__selected-day-container{
+    width: 80%;
+    margin: auto;
+}
+
 .user-container__user-challenges-container {
     margin: auto;
     height: 65%;
@@ -432,7 +435,6 @@ input:checked+.slider:before {
     overflow-y: auto;
     margin: auto;
 }
-
 
 .challenge {
     border: 1px var(--border-black) solid;

@@ -6,6 +6,7 @@ const daysTable = document.querySelector('#days-table')
 const userAvatarContainer = document.querySelector('#user-avatar-container')
 const userChallengesContainer = document.querySelector('#user-challenges-container')
 const currentMonthContainer = document.querySelector('#currnet-month-container')
+const currentDayContainer = document.querySelector('#current-day-container')
 
 // buttons      
 const switchMenuButton = document.querySelector('#switch-user-menu-button')
@@ -30,10 +31,6 @@ localStorage.removeItem('selectedDay')
 localStorage.removeItem('selectedMonth')
 localStorage.removeItem('id')
 
-if (!localStorage.getItem('user')) {
-    alert('Enter your username in settings')
-}
-
 //main objects
 const daysStore = new Map()
 const mainDate = new Date();
@@ -42,6 +39,10 @@ let days = calculateDays()
 const calendar = new Calendar(days)
 
 render()
+
+if (!localStorage.getItem('user')) {
+    alert('Enter your username in settings')
+}
 
 //functions
 eventBtn.onclick = () => {
@@ -63,6 +64,11 @@ reminderBtn.onclick = () => {
 }
 
 addChallengeButton.onclick = () => {
+    if(!localStorage.getItem('selectedDay')){
+        alert(`You don't select day`)
+        return
+    }
+
     modalLayout.className = 'modal-layout'
     modalHeader.className = 'modal-header'
     form.setIsEdit(false)
@@ -216,6 +222,7 @@ function parseObjectToChallenge(key, value) {
 
 function renderCurrentDayChallenges(challenges) {
     userChallengesContainer.innerHTML = ''
+    currentDayContainer.innerHTML = `<p>${localStorage.getItem('selectedDay')}</p>`
     challenges?.map(challenge => userChallengesContainer.appendChild(challenge.render(onChallengeClick)))
 }
 

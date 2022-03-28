@@ -180,6 +180,7 @@ class Form {
 
             const userName = form.querySelector('#name').value
             localStorage.setItem('user', userName)
+            alert(`Hello ${userName}`)
             await render()
         }
 

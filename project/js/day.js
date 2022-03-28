@@ -29,8 +29,8 @@ class Day {
         }
         dayTd.id = `${this.dayMonth}-${this.dayNum}-${this.dayYear}`
         dayTd.onclick = () => {
-            renderCurrentDayChallenges(this.challenges)
             localStorage.setItem('selectedDay', this.id)
+            renderCurrentDayChallenges(this.challenges)
         }
 
         const dayNumContainer = document.createElement('div')
