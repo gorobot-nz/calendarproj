@@ -11,7 +11,7 @@ export const routes = {
 }
 
 const AppRouter = () => {
-    const [isAuth, setIsAuth] = useState(false)
+    const [isAuth, setIsAuth] = useState(true)
 
     return (
         <Routes>
