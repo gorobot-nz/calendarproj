@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 const DateContainer = () => {
-    const dispatch = useDispatch()
     const [date, setDate] = useState(new Date());
 
     const setNextMonth = () => {
