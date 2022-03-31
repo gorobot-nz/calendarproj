@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Main from "../pages/Main"
 import SignIn from "../pages/SignIn"
@@ -11,7 +12,7 @@ export const routes = {
 }
 
 const AppRouter = () => {
-    const [isAuth, setIsAuth] = useState(true)
+    const isAuth = useSelector(state => state.userReducer.isAuth)
 
     return (
         <Routes>
