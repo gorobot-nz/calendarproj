@@ -2,12 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Main from "../pages/Main"
-import SignIn from "../pages/SignIn"
-import SignUp from "../pages/SignUp"
+import Auth from "../pages/Auth"
 
 export const routes = {
-    SIGN_UP: '/signup',
-    SIGN_IN: '/signin',
+    AUTH: '/auth',
     MAIN: '/main',
 }
 
@@ -24,9 +22,8 @@ const AppRouter = () => {
                     </>
                     :
                     <>
-                        <Route path={routes.SIGN_IN} element={<SignIn />} />
-                        <Route path={routes.SIGN_UP} element={<SignUp />} />
-                        <Route path="*" element={<Navigate to={routes.SIGN_IN} />} />
+                        <Route path={routes.AUTH} element={<Auth />} />
+                        <Route path="*" element={<Navigate to={routes.AUTH} />} />
                     </>
             }
         </Routes>

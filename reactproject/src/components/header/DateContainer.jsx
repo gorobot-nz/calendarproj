@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { FetchChallengesAction, SetMonthAction } from '../../redux/calendar/actionCreators'
@@ -9,12 +9,6 @@ const DateContainer = () => {
     const dispatch = useDispatch()
     const [date, setDate] = useState(new Date());
     dispatch(SetMonthAction(`${MONTHS[date.getMonth()]}-${date.getFullYear()}`))
-    const user = useSelector(state => state.userReducer.user)
-
-    useEffect(() => {
-        dispatch(FetchChallengesAction(user, `${MONTHS[date.getMonth()]}-${date.getFullYear()}`))
-        console.log(user)
-    }, [])
 
     const setNextMonth = () => {
         setDate(new Date(date.getFullYear(), date.getMonth() + 1))

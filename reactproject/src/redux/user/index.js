@@ -1,6 +1,6 @@
 export const defaultState = {
-    user: 'Babilen',
-    isAuth: true
+    user: {},
+    isAuth: false
 }
 
 export const SET_USER = 'SET_USER'

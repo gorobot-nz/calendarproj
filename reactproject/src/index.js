@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from "react-router-dom";
 import App from './App';
 import { store } from './redux/index'
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore"
+import { getAuth } from "firebase/auth"
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyDrzYuj42DQiJN71wGyXL70bkq-c_TQji8",
@@ -17,12 +20,22 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app)
+const auth = getAuth(app)
+
+export const Context = createContext(null)
 
 ReactDOM.render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </Provider>,
+    <Context.Provider value={{
+        app,
+        db,
+        auth
+    }}>
+        <Provider store={store}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </Provider>
+    </Context.Provider>,
     document.getElementById('root')
 );
