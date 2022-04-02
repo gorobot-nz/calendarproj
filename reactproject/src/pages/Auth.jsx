@@ -1,31 +1,21 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../index";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
+import FormGroup from "../components/forms/FormGroup";
 
 const Auth = () => {
     const { auth } = useContext(Context)
     const [user, setUser] = useState({})
 
-
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
         const eventName = event.nativeEvent.submitter.name
         if (eventName === 'SignUp') {
-            createUserWithEmailAndPassword(auth, user.email, user.password)
-                .then((userCredential) => {
-                    console.log(userCredential.user)
-                })
-                .catch((error) => {
-                    console.log(error)
-                });
+            const responce = await createUserWithEmailAndPassword(auth, user.email, user.password)
+            console.log('d', responce)
         } else {
-            signInWithEmailAndPassword(auth, user.email, user.password)
-                .then((userCredential) => {
-                    console.log(userCredential.user)
-                })
-                .catch((error) => {
-                    console.log(error)
-                });
+            const responce = await signInWithEmailAndPassword(auth, user.email, user.password)
+            console.log('d', responce)
         }
     }
 
@@ -35,10 +25,10 @@ const Auth = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input type={'email'} name='email' onChange={handleChange} />
-            <input type={'password'} name='password' onChange={handleChange} />
-            <input type={'submit'} name='SignIn' value='Sign In' />
-            <input type={'submit'} name='SignUp' value='Sign Up' />
+            <FormGroup handler={handleChange} inputType='email' labelName='Email' name='email' />
+            <FormGroup handler={handleChange} inputType='password' labelName='Password' name='password' />
+            <input className="wide-btn" type={'submit'} name='SignIn' value='Sign In' />
+            <input className="wide-btn" type={'submit'} name='SignUp' value='Sign Up' />
         </form>
     )
 }

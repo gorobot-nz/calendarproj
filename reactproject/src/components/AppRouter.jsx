@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Main from "../pages/Main"
 import Auth from "../pages/Auth"
+import { Context } from "../index";
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 export const routes = {
     AUTH: '/auth',
@@ -10,12 +12,14 @@ export const routes = {
 }
 
 const AppRouter = () => {
-    const isAuth = useSelector(state => state.userReducer.isAuth)
+    const { auth } = useContext(Context)
+    const [user] = useAuthState(auth)
+    console.log(user)
 
     return (
         <Routes>
             {
-                isAuth ?
+                user ?
                     <>
                         <Route path={routes.MAIN} element={<Main />} />
                         <Route path="*" element={<Navigate to={routes.MAIN} />} />
