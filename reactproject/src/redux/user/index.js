@@ -1,6 +1,6 @@
 export const defaultState = {
     user: {},
-    isAuth: false
+    isAuth: true
 }
 
 export const SET_USER = 'SET_USER'
