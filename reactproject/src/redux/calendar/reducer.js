@@ -5,11 +5,9 @@ export const calendarReducer = (state = defaultState, action) => {
         case SET_DAYS:
             return { ...state, days: action.payload }
         case SET_DAY:
-            const [m, d, y] = action.payload.split('-')
-            return { ...state, selectedDay: d, selectedMonth: m, selectedYear: y }
+            return { ...state, selectedDay: action.payload }
         case SET_MONTH:
-            const [month, year] = action.payload.split('-')
-            return { ...state, selectedeDay: null, selectedMonth: month, selectedYear: year }
+            return { ...state, selectedMonth: action.payload }
         default:
             return state
     }

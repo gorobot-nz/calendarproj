@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { SetDaysAction, SetMonthAction } from '../../redux/calendar/actionCreators'
+import { SetDayAction, SetDaysAction, SetMonthAction } from '../../redux/calendar/actionCreators'
 import { MONTHS, computeDays } from '../../utils/utils'
 
 const DateContainer = () => {
@@ -12,11 +12,13 @@ const DateContainer = () => {
     const setNextMonth = () => {
         setDate(new Date(date.getFullYear(), date.getMonth() + 1))
         dispatch(SetMonthAction(`${MONTHS[date.getMonth()]}-${date.getFullYear()}`))
+        dispatch(SetDayAction(null))
     }
 
     const setPrevMonth = () => {
         setDate(new Date(date.getFullYear(), date.getMonth() - 1))
         dispatch(SetMonthAction(`${MONTHS[date.getMonth()]}-${date.getFullYear()}`))
+        dispatch(SetDayAction(null))
     }
 
     useEffect(() => {

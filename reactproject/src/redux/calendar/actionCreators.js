@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { SET_DAY, SET_DAYS, SET_MONTH } from './index'
 
 export const SetDaysAction = (payload) => ({ type: SET_DAYS, payload })

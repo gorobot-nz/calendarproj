@@ -2,7 +2,6 @@ export const defaultState = {
     days: [],
     selectedDay: null,
     selectedMonth: '',
-    selectedYear: '',
 }
 
 export const SET_DAYS = 'SET_DAYS'

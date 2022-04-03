@@ -1,9 +1,15 @@
 import React from "react";
+import { useSelector } from 'react-redux'
 
 const CurrentDayContainer = () => {
+    const selectedDay = useSelector(state => state.calendarReducer.selectedDay)
+    console.log(selectedDay)
+
     return (
         <div id="current-day-container" className="user-container__selected-day-container">
-            <p>Select day</p>
+            <p>
+                {selectedDay ? selectedDay : 'Select day'}
+            </p>
         </div>
     )
 }
