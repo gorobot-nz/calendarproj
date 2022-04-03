@@ -1,13 +1,19 @@
 import React, { useContext } from "react";
 import { Context } from "../../index";
 import { useAuthState } from 'react-firebase-hooks/auth'
+import { useDispatch } from "react-redux";
+import { SetDayAction, SetDaysAction, SetMonthAction } from "../../redux/calendar/actionCreators";
 
 const UserImageContainer = () => {
+    const dispatch = useDispatch()
     const { auth } = useContext(Context)
     const [user] = useAuthState(auth)
 
     const handleSignout = async () => {
         await auth.signOut()
+        dispatch(SetDayAction(null))
+        dispatch(SetMonthAction(''))
+        dispatch(SetDaysAction([]))
     }
 
     return (
