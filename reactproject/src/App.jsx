@@ -5,10 +5,7 @@ import './App.css'
 
 const App = () => {
     return (
-        <>
-            <Header />
-            <AppRouter />
-        </>
+        <AppRouter />
     );
 }
 
