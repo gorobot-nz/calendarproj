@@ -14,7 +14,7 @@ const Main = () => {
                     <CalendarSection />
                 </div>
             </main>
-            <Modal isVisible={true} />
+            <Modal />
         </>
     )
 }

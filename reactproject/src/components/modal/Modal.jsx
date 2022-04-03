@@ -1,11 +1,16 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import ModalForm from "../forms/ModalForm";
+import { SetIsVisibleAction } from "../../redux/modal/actionCreators";
 
 const REMINDER = 'r'
 const TASK = 't'
 const EVENT = 'e'
 
-const Modal = ({ isVisible }) => {
+const Modal = () => {
+    const dispatch = useDispatch()
+    const isVisible = useSelector(state => state.modalReducer.isVisible)
     const cls = isVisible ? 'modal-layout' : 'hidden-layout'
 
     const [formType, setFormType] = useState(REMINDER)
@@ -14,8 +19,14 @@ const Modal = ({ isVisible }) => {
         setFormType(type)
     }
 
+    const hideModal = (event) => {
+        if (event.target.id === 'layout') {
+            dispatch(SetIsVisibleAction(false))
+        }
+    }
+
     return (
-        <div className={cls}>
+        <div id='layout' className={cls} onClick={hideModal}>
             <div className="modal-layout__modal">
                 <div className="modal-header">
                     <button className="modal-btn" onClick={() => { handleClick(EVENT) }}>Event</button>
