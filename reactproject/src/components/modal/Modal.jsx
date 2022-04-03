@@ -11,7 +11,9 @@ const EVENT = 'e'
 const Modal = () => {
     const dispatch = useDispatch()
     const isVisible = useSelector(state => state.modalReducer.isVisible)
-    const cls = isVisible ? 'modal-layout' : 'hidden-layout'
+    const isEdit = useSelector(state => state.modalReducer.isEdit)
+    const layoutClass = isVisible ? 'modal-layout' : 'hidden-layout'
+    const headerClass = isEdit ? 'hidden-layout' : 'modal-header'
 
     const [formType, setFormType] = useState(REMINDER)
 
@@ -26,9 +28,9 @@ const Modal = () => {
     }
 
     return (
-        <div id='layout' className={cls} onClick={hideModal}>
+        <div id='layout' className={layoutClass} onClick={hideModal}>
             <div className="modal-layout__modal">
-                <div className="modal-header">
+                <div className={headerClass}>
                     <button className="modal-btn" onClick={() => { handleClick(EVENT) }}>Event</button>
                     <button className="modal-btn" onClick={() => { handleClick(TASK) }}>Task</button>
                     <button className="modal-btn" onClick={() => { handleClick(REMINDER) }}>Reminder</button>

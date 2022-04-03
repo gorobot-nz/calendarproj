@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import FormGroup from "./FormGroup";
 import FormSelect from "./FormSelext";
 
@@ -6,7 +7,8 @@ const REMINDER = 'r'
 const TASK = 't'
 const EVENT = 'e'
 
-const ModalForm = ({ type, isEdit }) => {
+const ModalForm = ({ type }) => {
+    const isEdit = useSelector(state => state.modalReducer.isEdit)
     const [challenge, setChallenge] = useState({})
 
     const handleChange = (event) => {
@@ -30,6 +32,12 @@ const ModalForm = ({ type, isEdit }) => {
         <form className="modal-form" onSubmit={handleSubmit}>
             {fields}
             <input className="wide-btn" type={'submit'} value='Save' />
+            {
+                isEdit ?
+                    <input className="wide-btn" type={'submit'} value='Delete' />
+                    :
+                    <></>
+            }
         </form>
     )
 }
