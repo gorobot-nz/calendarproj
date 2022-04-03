@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../index";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth"
 import FormGroup from "../components/forms/FormGroup";
 
 const Auth = () => {
@@ -12,10 +12,11 @@ const Auth = () => {
         const eventName = event.nativeEvent.submitter.name
         if (eventName === 'SignUp') {
             const responce = await createUserWithEmailAndPassword(auth, user.email, user.password)
-            console.log('d', responce)
+            updateProfile(auth.currentUser, {
+                photoURL: user.photo
+            })
         } else {
             const responce = await signInWithEmailAndPassword(auth, user.email, user.password)
-            console.log('d', responce)
         }
     }
 
@@ -27,6 +28,7 @@ const Auth = () => {
         <form onSubmit={handleSubmit}>
             <FormGroup handler={handleChange} inputType='email' labelName='Email' name='email' />
             <FormGroup handler={handleChange} inputType='password' labelName='Password' name='password' />
+            <FormGroup handler={handleChange} inputType='text' labelName='Photo' name='photo' />
             <input className="wide-btn" type={'submit'} name='SignIn' value='Sign In' />
             <input className="wide-btn" type={'submit'} name='SignUp' value='Sign Up' />
         </form>

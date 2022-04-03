@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { useSelector } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Main from "../pages/Main"
 import Auth from "../pages/Auth"

@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import { Context } from "../../index";
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 const UserImageContainer = () => {
     const { auth } = useContext(Context)
+    const [user] = useAuthState(auth)
 
     const handleSignout = async () => {
         await auth.signOut()
@@ -10,7 +12,7 @@ const UserImageContainer = () => {
 
     return (
         <div id="user-avatar-container" className="user-container__avatar-container">
-            <img className="shadow" id="user-avatar" src="./img/c46888f9135c3b440f5d9060a345b35e.png" alt="No image yet" onClick={handleSignout} />
+            <img className="shadow" id="user-avatar" src={user.photoURL} alt="No image yet" onClick={handleSignout} />
         </div>
     )
 }

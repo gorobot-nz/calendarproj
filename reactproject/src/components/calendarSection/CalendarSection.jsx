@@ -26,9 +26,7 @@ const CalendarSection = () => {
                     </tr>
                 </thead>
                 <tbody id="days-table" className="day-values">
-                    {
-                        weeks
-                    }
+                    {weeks}
                 </tbody>
             </table>
         </section>
