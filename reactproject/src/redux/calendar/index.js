@@ -1,5 +1,5 @@
 export const defaultState = {
-    days: new Map(),
+    days: [],
     selectedDay: null,
     selectedMonth: '',
     selectedYear: '',

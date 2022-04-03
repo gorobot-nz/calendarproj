@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Context } from "../../index";
 
 const UserImageContainer = () => {
-
     const { auth } = useContext(Context)
 
     const handleSignout = async () => {

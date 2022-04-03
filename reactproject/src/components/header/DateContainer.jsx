@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { FetchChallengesAction, SetMonthAction } from '../../redux/calendar/actionCreators'
-
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+import React, { useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
+import { SetDaysAction, SetMonthAction } from '../../redux/calendar/actionCreators'
+import { MONTHS, computeDays } from '../../utils/utils'
 
 const DateContainer = () => {
     const dispatch = useDispatch()
     const [date, setDate] = useState(new Date());
+    date.setDate(1)
     dispatch(SetMonthAction(`${MONTHS[date.getMonth()]}-${date.getFullYear()}`))
 
     const setNextMonth = () => {
@@ -19,6 +18,11 @@ const DateContainer = () => {
         setDate(new Date(date.getFullYear(), date.getMonth() - 1))
         dispatch(SetMonthAction(`${MONTHS[date.getMonth()]}-${date.getFullYear()}`))
     }
+
+    useEffect(() => {
+        const days = computeDays(date)
+        dispatch(SetDaysAction(days))
+    }, [date])
 
     return (
         <div className="header__date-container">
