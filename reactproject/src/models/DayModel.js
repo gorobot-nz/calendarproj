@@ -3,6 +3,7 @@ export class DayModel {
         this.day = day
         this.month = month
         this.year = year
+        this.id = `${month}-${day}-${year}`
         this.challenges = challenges
         this.addStyle = addStyle
     }
