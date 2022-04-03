@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import ModalForm from "../forms/ModalForm";
 import { SetIsVisibleAction } from "../../redux/modal/actionCreators";
 
-const REMINDER = 'r'
-const TASK = 't'
-const EVENT = 'e'
+const REMINDER = 'REMINDER'
+const TASK = 'TASK'
+const EVENT = 'EVENT'
 
 const Modal = () => {
     const dispatch = useDispatch()
