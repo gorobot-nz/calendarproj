@@ -4,20 +4,21 @@ import FormGroup from "./FormGroup";
 import FormSelect from "./FormSelext";
 import { useDispatch } from "react-redux";
 import { SetIsVisibleAction } from "../../redux/modal/actionCreators";
-import { useDb } from '../../hooks/useDb'
 import { Context } from "../../index";
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { collection, addDoc } from 'firebase/firestore'
 
 const REMINDER = 'REMINDER'
 const TASK = 'TASK'
 
 const ModalForm = ({ type }) => {
     const dispatch = useDispatch()
-
     const isEdit = useSelector(state => state.modalReducer.isEdit)
+    const {selectedDay, selectedMonth} = useSelector(state => state.calendarReducer)
     const [challenge, setChallenge] = useState({ type: type })
     const { db, auth } = useContext(Context)
-
-    const addChallenge = useDb(db, auth)
+    const [user] = useAuthState(auth)
+    const challengesCollectionRef = collection(db, 'challenges')
 
     const handleChange = (event) => {
         setChallenge(challenge => ({ ...challenge, [event.target.name]: event.target.value }))
@@ -25,7 +26,7 @@ const ModalForm = ({ type }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-        await addChallenge(challenge)
+        await addDoc(challengesCollectionRef, { ...challenge, userId: user.uid, day: selectedDay, month: selectedMonth })
         dispatch(SetIsVisibleAction(false))
     }
 
