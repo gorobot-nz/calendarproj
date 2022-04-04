@@ -8,13 +8,14 @@ import { Context } from "../../index";
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { collection, addDoc } from 'firebase/firestore'
 
-const REMINDER = 'REMINDER'
-const TASK = 'TASK'
+const REMINDER = 'reminder'
+const TASK = 'task'
 
 const ModalForm = ({ type }) => {
+    console.log(type)
     const dispatch = useDispatch()
     const isEdit = useSelector(state => state.modalReducer.isEdit)
-    const {selectedDay, selectedMonth} = useSelector(state => state.calendarReducer)
+    const { selectedDay, selectedMonth } = useSelector(state => state.calendarReducer)
     const [challenge, setChallenge] = useState({ type: type })
     const { db, auth } = useContext(Context)
     const [user] = useAuthState(auth)

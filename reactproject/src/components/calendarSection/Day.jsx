@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { SetDayAction } from '../../redux/calendar/actionCreators'
+import Challenge from '../challenges/Challenge'
 
 const Day = ({ dayModel }) => {
     let cls = 'day-values__week__day'
@@ -9,7 +10,6 @@ const Day = ({ dayModel }) => {
     }
 
     const dispatch = useDispatch()
-
     const handleClick = () => {
         dispatch(SetDayAction(`${dayModel.month}-${dayModel.day}-${dayModel.year}`))
     }
@@ -20,7 +20,9 @@ const Day = ({ dayModel }) => {
                 <p>{dayModel.day}</p>
             </div>
             <div className="day-values__week__day__day-info__day-tasks">
-
+                {dayModel.challenges.map(challenge => (
+                    <Challenge key={challenge.id} title={challenge.title} type={challenge.type} />
+                ))}
             </div>
         </td>
     )
