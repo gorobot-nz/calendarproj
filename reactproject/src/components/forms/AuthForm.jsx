@@ -10,13 +10,25 @@ const AuthForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault()
         const eventName = event.nativeEvent.submitter.name
+        if (user.email === '' || user.password === '') {
+            alert('Really???')
+            return
+        }
         if (eventName === 'SignUp') {
-            const responce = await createUserWithEmailAndPassword(auth, user.email, user.password)
-            updateProfile(auth.currentUser, {
-                photoURL: user.photo
-            })
+            try {
+                const responce = await createUserWithEmailAndPassword(auth, user.email, user.password)
+                updateProfile(auth.currentUser, {
+                    photoURL: user.photo
+                })
+            } catch (e) {
+                alert('I think you should choose another mail')
+            }
         } else {
-            const responce = await signInWithEmailAndPassword(auth, user.email, user.password)
+            try {
+                const responce = await signInWithEmailAndPassword(auth, user.email, user.password)
+            } catch (e) {
+                alert('Check your data, DUDE')
+            }
         }
     }
 

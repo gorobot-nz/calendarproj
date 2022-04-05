@@ -12,12 +12,10 @@ import { fetchChallenges, SetCurrentDayChallengesAction } from "../../redux/cale
 const REMINDER = 'reminder'
 const TASK = 'task'
 
-const ModalForm = ({ type, isEdit, inputModel }) => {
+const ModalForm = ({ formType, isEdit, inputModel }) => {
     const dispatch = useDispatch()
     const { selectedDay, selectedMonth } = useSelector(state => state.calendarReducer)
     const [challenge, setChallenge] = useState({})
-    console.log('model', inputModel)
-    console.log('challenge', challenge)
     const { db, auth } = useContext(Context)
     const [user] = useAuthState(auth)
     const challengesCollectionRef = collection(db, 'challenges')
@@ -32,12 +30,13 @@ const ModalForm = ({ type, isEdit, inputModel }) => {
             const challengeDoc = doc(db, "challenges", inputModel.id);
             await updateDoc(challengeDoc, challenge)
         } else {
-            await addDoc(challengesCollectionRef, { ...challenge, userId: user.uid, day: selectedDay, month: selectedMonth })
+            await addDoc(challengesCollectionRef, { ...challenge, type: formType, userId: user.uid, day: selectedDay, month: selectedMonth })
         }
         dispatch(SetIsVisibleAction(false))
         dispatch(fetchChallenges(challengesCollectionRef, user.uid, selectedMonth))
         dispatch(SetInputModelAction({}))
         dispatch(SetCurrentDayChallengesAction([]))
+        setChallenge({})
     }
 
     const submitDelete = async (event) => {
@@ -48,19 +47,22 @@ const ModalForm = ({ type, isEdit, inputModel }) => {
         dispatch(fetchChallenges(challengesCollectionRef, user.uid, selectedMonth))
         dispatch(SetInputModelAction({}))
         dispatch(SetCurrentDayChallengesAction([]))
+        setChallenge({})
     }
 
-    const fields = [<FormGroup key={1} inputType='text' handler={handleChange} name='title' labelName='Title' val={challenge.title} />]
-    if (type !== REMINDER) {
-        fields.push(<FormGroup key={2} inputType='textarea' handler={handleChange} name='description' labelName='Description' val={challenge.description} />)
-        if (type !== TASK) {
-            fields.push(<FormSelect key={3} handler={handleChange} name='period' labelName='Period' val={challenge.period} />)
+    const checkForm = inputModel.type ? inputModel.type : formType
+
+    const fields = [<FormGroup key={1} inputType='text' handler={handleChange} name='title' labelName='Title' val={challenge?.title} />]
+    if (checkForm !== REMINDER) {
+        fields.push(<FormGroup key={2} inputType='textarea' handler={handleChange} name='description' labelName='Description' val={challenge?.description} />)
+        if (checkForm !== TASK) {
+            fields.push(<FormSelect key={3} handler={handleChange} name='period' labelName='Period' val={challenge?.period} />)
         }
     }
 
     useEffect(() => {
-        setChallenge({ ...inputModel, type: type });
-    }, [inputModel]);
+        setChallenge({ ...inputModel });
+    }, [inputModel, formType]);
 
     return (
         <form className="modal-form">
