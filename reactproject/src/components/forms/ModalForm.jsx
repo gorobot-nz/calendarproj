@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import FormGroup from "./FormGroup";
 import FormSelect from "./FormSelext";
 import { useDispatch } from "react-redux";
-import { SetIsVisibleAction } from "../../redux/modal/actionCreators";
+import { SetInputModelAction, SetIsVisibleAction } from "../../redux/modal/actionCreators";
 import { Context } from "../../index";
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { collection, addDoc } from 'firebase/firestore'
+import { doc, collection, addDoc, updateDoc, deleteDoc } from 'firebase/firestore'
 import { fetchChallenges, SetCurrentDayChallengesAction } from "../../redux/calendar/actionCreators";
 
 const REMINDER = 'reminder'
@@ -26,11 +26,27 @@ const ModalForm = ({ type, isEdit, inputModel }) => {
         setChallenge(challenge => ({ ...challenge, [event.target.name]: event.target.value }))
     }
 
-    const handleSubmit = async (event) => {
+    const submitSave = async (event) => {
         event.preventDefault()
-        await addDoc(challengesCollectionRef, { ...challenge, userId: user.uid, day: selectedDay, month: selectedMonth })
+        if (isEdit) {
+            const challengeDoc = doc(db, "challenges", inputModel.id);
+            await updateDoc(challengeDoc, challenge)
+        } else {
+            await addDoc(challengesCollectionRef, { ...challenge, userId: user.uid, day: selectedDay, month: selectedMonth })
+        }
         dispatch(SetIsVisibleAction(false))
         dispatch(fetchChallenges(challengesCollectionRef, user.uid, selectedMonth))
+        dispatch(SetInputModelAction({}))
+        dispatch(SetCurrentDayChallengesAction([]))
+    }
+
+    const submitDelete = async (event) => {
+        event.preventDefault()
+        const challengeDoc = doc(db, "challenges", inputModel.id);
+        await deleteDoc(challengeDoc)
+        dispatch(SetIsVisibleAction(false))
+        dispatch(fetchChallenges(challengesCollectionRef, user.uid, selectedMonth))
+        dispatch(SetInputModelAction({}))
         dispatch(SetCurrentDayChallengesAction([]))
     }
 
@@ -43,16 +59,16 @@ const ModalForm = ({ type, isEdit, inputModel }) => {
     }
 
     useEffect(() => {
-        setChallenge({ ...inputModel });
+        setChallenge({ ...inputModel, type: type });
     }, [inputModel]);
 
     return (
-        <form className="modal-form" onSubmit={handleSubmit}>
+        <form className="modal-form">
             {fields}
-            <input id={isEdit ? 'update' : 'create'} className="wide-btn" type={'submit'} value='Save' />
+            <input id={isEdit ? 'update' : 'create'} className="wide-btn" type={'submit'} value='Save' onClick={submitSave} />
             {
                 isEdit ?
-                    <input id='delete' className="wide-btn" type={'submit'} value='Delete' />
+                    <input id='delete' className="wide-btn" type={'submit'} value='Delete' onClick={submitDelete} />
                     :
                     <></>
             }
