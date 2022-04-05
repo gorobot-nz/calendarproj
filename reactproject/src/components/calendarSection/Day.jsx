@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { SetDayAction } from '../../redux/calendar/actionCreators'
+import { SetCurrentDayChallengesAction, SetDayAction } from '../../redux/calendar/actionCreators'
 import Challenge from '../challenges/Challenge'
 
 const Day = ({ dayModel }) => {
@@ -12,6 +12,7 @@ const Day = ({ dayModel }) => {
     const dispatch = useDispatch()
     const handleClick = () => {
         dispatch(SetDayAction(`${dayModel.month}-${dayModel.day}-${dayModel.year}`))
+        dispatch(SetCurrentDayChallengesAction(dayModel.challenges))
     }
 
     return (

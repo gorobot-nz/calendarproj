@@ -1,4 +1,4 @@
-import { defaultState, SET_DAYS, SET_MONTH, SET_DAY, SET_CHALLENGES, SET_IS_LOADING } from './index'
+import { defaultState, SET_DAYS, SET_MONTH, SET_DAY, SET_CHALLENGES, SET_IS_LOADING, SET_CURRENT_DAY_CHALLENGES } from './index'
 
 export const calendarReducer = (state = defaultState, action) => {
     switch (action.type) {
@@ -8,6 +8,8 @@ export const calendarReducer = (state = defaultState, action) => {
             return { ...state, selectedDay: action.payload }
         case SET_CHALLENGES:
             return { ...state, challenges: action.payload }
+        case SET_CURRENT_DAY_CHALLENGES:
+            return { ...state, currentDayChallenges: action.payload }
         case SET_MONTH:
             return { ...state, selectedMonth: action.payload }
         case SET_IS_LOADING:
