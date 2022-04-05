@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import ModalForm from "../forms/ModalForm";
-import { SetIsVisibleAction } from "../../redux/modal/actionCreators";
+import { SetInputModelAction, SetIsVisibleAction } from "../../redux/modal/actionCreators";
 
 const REMINDER = 'reminder'
 const TASK = 'task'
@@ -10,8 +10,7 @@ const EVENT = 'event'
 
 const Modal = () => {
     const dispatch = useDispatch()
-    const isVisible = useSelector(state => state.modalReducer.isVisible)
-    const isEdit = useSelector(state => state.modalReducer.isEdit)
+    const { isVisible, isEdit, inputModel } = useSelector(state => state.modalReducer)
     const layoutClass = isVisible ? 'modal-layout' : 'hidden-layout'
     const headerClass = isEdit ? 'hidden-layout' : 'modal-header'
 
@@ -24,6 +23,7 @@ const Modal = () => {
     const hideModal = (event) => {
         if (event.target.id === 'layout') {
             dispatch(SetIsVisibleAction(false))
+            dispatch(SetInputModelAction({}))
         }
     }
 
@@ -36,7 +36,7 @@ const Modal = () => {
                     <button className="modal-btn" onClick={() => { handleClick(REMINDER) }}>Reminder</button>
                 </div>
                 <div className="form-container">
-                    <ModalForm type={formType} isEdit={false} />
+                    <ModalForm type={formType} isEdit={isEdit} inputModel={inputModel}/>
                 </div>
             </div>
         </div>

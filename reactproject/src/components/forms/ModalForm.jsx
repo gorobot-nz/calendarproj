@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import FormGroup from "./FormGroup";
 import FormSelect from "./FormSelext";
@@ -12,11 +12,12 @@ import { fetchChallenges, SetCurrentDayChallengesAction } from "../../redux/cale
 const REMINDER = 'reminder'
 const TASK = 'task'
 
-const ModalForm = ({ type }) => {
+const ModalForm = ({ type, isEdit, inputModel }) => {
     const dispatch = useDispatch()
-    const isEdit = useSelector(state => state.modalReducer.isEdit)
     const { selectedDay, selectedMonth } = useSelector(state => state.calendarReducer)
-    const [challenge, setChallenge] = useState({ type: type })
+    const [challenge, setChallenge] = useState({})
+    console.log('model', inputModel)
+    console.log('challenge', challenge)
     const { db, auth } = useContext(Context)
     const [user] = useAuthState(auth)
     const challengesCollectionRef = collection(db, 'challenges')
@@ -33,21 +34,25 @@ const ModalForm = ({ type }) => {
         dispatch(SetCurrentDayChallengesAction([]))
     }
 
-    const fields = [<FormGroup key={1} inputType='text' handler={handleChange} name='title' labelName='Title' />]
+    const fields = [<FormGroup key={1} inputType='text' handler={handleChange} name='title' labelName='Title' val={challenge.title} />]
     if (type !== REMINDER) {
-        fields.push(<FormGroup key={2} inputType='textarea' handler={handleChange} name='description' labelName='Description' />)
+        fields.push(<FormGroup key={2} inputType='textarea' handler={handleChange} name='description' labelName='Description' val={challenge.description} />)
         if (type !== TASK) {
-            fields.push(<FormSelect key={3} handler={handleChange} name='period' labelName='Period' />)
+            fields.push(<FormSelect key={3} handler={handleChange} name='period' labelName='Period' val={challenge.period} />)
         }
     }
+
+    useEffect(() => {
+        setChallenge({ ...inputModel });
+    }, [inputModel]);
 
     return (
         <form className="modal-form" onSubmit={handleSubmit}>
             {fields}
-            <input className="wide-btn" type={'submit'} value='Save' />
+            <input id={isEdit ? 'update' : 'create'} className="wide-btn" type={'submit'} value='Save' />
             {
                 isEdit ?
-                    <input className="wide-btn" type={'submit'} value='Delete' />
+                    <input id='delete' className="wide-btn" type={'submit'} value='Delete' />
                     :
                     <></>
             }

@@ -8,7 +8,6 @@ const CalendarSection = () => {
     const days = useSelector(state => state.calendarReducer.days)
     const challenges = useSelector(state => state.calendarReducer.challenges)
     const isLoading = useSelector(state => state.calendarReducer.isLoading)
-    console.log(isLoading)
     const weeksCount = days.length / 7
     const weeks = []
 

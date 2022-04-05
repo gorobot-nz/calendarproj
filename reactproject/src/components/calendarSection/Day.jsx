@@ -27,8 +27,6 @@ const Day = ({ dayModel }) => {
         }
     })
 
-    console.log(challengeTypesCount)
-
     return (
         <td className={cls} onClick={handleClick}>
             <div className="day-values__week__day__day-info__day-num">
