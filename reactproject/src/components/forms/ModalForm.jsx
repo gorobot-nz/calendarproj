@@ -12,7 +12,6 @@ const REMINDER = 'reminder'
 const TASK = 'task'
 
 const ModalForm = ({ type }) => {
-    console.log(type)
     const dispatch = useDispatch()
     const isEdit = useSelector(state => state.modalReducer.isEdit)
     const { selectedDay, selectedMonth } = useSelector(state => state.calendarReducer)

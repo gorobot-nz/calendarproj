@@ -6,7 +6,7 @@ const PAST_MONTH_DATE = 'past-month-date'
 const CURRENT_DATE = 'current-date'
 const NEXT_MONTH_DATE = 'next-month-date'
 
-export const computeDays = (date, challenges) => {
+export const computeDays = (date) => {
     const lastDay = new Date(
         date.getFullYear(),
         date.getMonth() + 1,
@@ -38,6 +38,29 @@ export const computeDays = (date, challenges) => {
     const nextMonth = MONTHS[date.getMonth()];
     date.setMonth(date.getMonth() - 1)
 
+    for (let i = firstDayIndex; i > 0; i--) {
+        days.push(new DayModel(prevLastDay - i + 1, prevMonth, date.getFullYear(), [], PAST_MONTH_DATE))
+    }
+
+    for (let i = 1; i <= lastDay; i++) {
+        if (
+            i === new Date().getDate() &&
+            date.getMonth() === new Date().getMonth()
+        ) {
+            days.push(new DayModel(i, currMonth, date.getFullYear(), [], CURRENT_DATE))
+        } else {
+            days.push(new DayModel(i, currMonth, date.getFullYear(), []))
+        }
+    }
+
+    for (let i = 1; i <= nextDays; i++) {
+        days.push(new DayModel(i, nextMonth, date.getFullYear(), [], NEXT_MONTH_DATE))
+    }
+
+    return days
+}
+
+export const setChallengesAndDays = (days, challenges) => {
     const challengesObj = challenges.reduce((map, obj) => {
         if (!map[obj.day]) {
             map[obj.day] = [obj]
@@ -46,30 +69,7 @@ export const computeDays = (date, challenges) => {
         }
         return map
     }, {})
-
-    console.log(challengesObj)
-
-    for (let i = firstDayIndex; i > 0; i--) {
-        const arr = challengesObj[`${prevMonth}-${prevLastDay - i + 1}-${date.getFullYear()}`] ? challengesObj[`${prevMonth}-${prevLastDay - i + 1}-${date.getFullYear()}`] : []
-        days.push(new DayModel(prevLastDay - i + 1, prevMonth, date.getFullYear(), arr, PAST_MONTH_DATE))
+    for (let i = 0; i < days.length; i++) {
+        days[i].challenges = challengesObj[days[i].id] ? challengesObj[days[i].id] : []
     }
-
-    for (let i = 1; i <= lastDay; i++) {
-        const arr = challengesObj[`${currMonth}-${i}-${date.getFullYear()}`] ? challengesObj[`${currMonth}-${i}-${date.getFullYear()}`] : []
-        if (
-            i === new Date().getDate() &&
-            date.getMonth() === new Date().getMonth()
-        ) {
-            days.push(new DayModel(i, currMonth, date.getFullYear(), arr, CURRENT_DATE))
-        } else {
-            days.push(new DayModel(i, currMonth, date.getFullYear(), arr))
-        }
-    }
-
-    for (let i = 1; i <= nextDays; i++) {
-        const arr = challengesObj[`${nextMonth}-${i}-${date.getFullYear()}`] ? challengesObj[`${nextMonth}-${i}-${date.getFullYear()}`] : []
-        days.push(new DayModel(i, nextMonth, date.getFullYear(), arr, NEXT_MONTH_DATE))
-    }
-
-    return days
 }

@@ -1,11 +1,24 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Week from "./Week";
+import { setChallengesAndDays } from '../../utils/utils'
+import Loader from "../Loader";
 
 const CalendarSection = () => {
     const days = useSelector(state => state.calendarReducer.days)
+    const challenges = useSelector(state => state.calendarReducer.challenges)
+    const isLoading = useSelector(state => state.calendarReducer.isLoading)
+    console.log(isLoading)
     const weeksCount = days.length / 7
     const weeks = []
+
+    if (isLoading) {
+        return (
+            <Loader />
+        )
+    }
+
+    setChallengesAndDays(days, challenges)
 
     for (let i = 0; i < weeksCount; i++) {
         weeks.push(<Week key={i} days={days.slice(i * 7, i * 7 + 7)} />)

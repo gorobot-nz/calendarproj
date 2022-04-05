@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useContext } from "react"
 import { Context } from '../../index'
 import { useDispatch } from "react-redux"
-import { SetDayAction, SetDaysAction, SetMonthAction } from '../../redux/calendar/actionCreators'
+import { SetDayAction, SetDaysAction, SetIsLoadingAction, SetMonthAction } from '../../redux/calendar/actionCreators'
 import { MONTHS, computeDays } from '../../utils/utils'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { collection, getDocs, query, where } from 'firebase/firestore'
+import { collection, } from 'firebase/firestore'
+import { fetchChallenges } from '../../redux/calendar/actionCreators'
 
 const DateContainer = () => {
     const dispatch = useDispatch()
@@ -13,12 +14,6 @@ const DateContainer = () => {
     const { db, auth } = useContext(Context)
     const [user] = useAuthState(auth)
     const challengesCollectionRef = collection(db, 'challenges')
-
-    async function fetchChallenges(collectionRef, userId, month) {
-        const q = query(collectionRef, where(`userId`, '==', userId), where('month', '==', month))
-        const t = await getDocs(q)
-        return t.docs.map(doc => ({ ...doc.data(), id: doc.id }))
-    }
 
     const setNextMonth = () => {
         setDate(new Date(date.getFullYear(), date.getMonth() + 1))
@@ -32,11 +27,10 @@ const DateContainer = () => {
         dispatch(SetDayAction(null))
     }
 
-    useEffect(async () => {
+    useEffect(() => {
+        dispatch(fetchChallenges(challengesCollectionRef, user.uid, `${MONTHS[date.getMonth()]}-${date.getFullYear()}`))
         dispatch(SetMonthAction(`${MONTHS[date.getMonth()]}-${date.getFullYear()}`))
-        const challenges = await fetchChallenges(challengesCollectionRef, user.uid, `${MONTHS[date.getMonth()]}-${date.getFullYear()}`)
-        console.log(challenges)
-        const days = computeDays(date, challenges)
+        const days = computeDays(date)
         dispatch(SetDaysAction(days))
     }, [date])
 
