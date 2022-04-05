@@ -7,6 +7,7 @@ import { SetIsVisibleAction } from "../../redux/modal/actionCreators";
 import { Context } from "../../index";
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { collection, addDoc } from 'firebase/firestore'
+import { fetchChallenges, SetCurrentDayChallengesAction } from "../../redux/calendar/actionCreators";
 
 const REMINDER = 'reminder'
 const TASK = 'task'
@@ -28,6 +29,8 @@ const ModalForm = ({ type }) => {
         event.preventDefault()
         await addDoc(challengesCollectionRef, { ...challenge, userId: user.uid, day: selectedDay, month: selectedMonth })
         dispatch(SetIsVisibleAction(false))
+        dispatch(fetchChallenges(challengesCollectionRef, user.uid, selectedMonth))
+        dispatch(SetCurrentDayChallengesAction([]))
     }
 
     const fields = [<FormGroup key={1} inputType='text' handler={handleChange} name='title' labelName='Title' />]

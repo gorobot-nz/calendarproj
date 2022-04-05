@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react"
 import { Context } from '../../index'
 import { useDispatch } from "react-redux"
-import { SetDayAction, SetDaysAction, SetIsLoadingAction, SetMonthAction } from '../../redux/calendar/actionCreators'
+import { SetCurrentDayChallengesAction, SetDayAction, SetDaysAction, SetMonthAction } from '../../redux/calendar/actionCreators'
 import { MONTHS, computeDays } from '../../utils/utils'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { collection, } from 'firebase/firestore'
@@ -17,17 +17,16 @@ const DateContainer = () => {
 
     const setNextMonth = () => {
         setDate(new Date(date.getFullYear(), date.getMonth() + 1))
-        dispatch(SetMonthAction(`${MONTHS[date.getMonth()]}-${date.getFullYear()}`))
-        dispatch(SetDayAction(null))
     }
 
     const setPrevMonth = () => {
         setDate(new Date(date.getFullYear(), date.getMonth() - 1))
-        dispatch(SetMonthAction(`${MONTHS[date.getMonth()]}-${date.getFullYear()}`))
-        dispatch(SetDayAction(null))
     }
 
     useEffect(() => {
+        dispatch(SetMonthAction(`${MONTHS[date.getMonth()]}-${date.getFullYear()}`))
+        dispatch(SetDayAction(null))
+        dispatch(SetCurrentDayChallengesAction([]))
         dispatch(fetchChallenges(challengesCollectionRef, user.uid, `${MONTHS[date.getMonth()]}-${date.getFullYear()}`))
         dispatch(SetMonthAction(`${MONTHS[date.getMonth()]}-${date.getFullYear()}`))
         const days = computeDays(date)
