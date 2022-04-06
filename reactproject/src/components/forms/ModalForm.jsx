@@ -43,6 +43,7 @@ const ModalForm = ({ formType, isEdit, inputModel }) => {
         event.preventDefault()
         if(! checkInput(challenge)){
             alert('Bruh dude')
+            return
         }
         if (isEdit) {
             const challengeDoc = doc(db, "challenges", inputModel.id);
