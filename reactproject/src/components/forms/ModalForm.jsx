@@ -63,7 +63,7 @@ const ModalForm = ({ formType, isEdit, inputModel }) => {
     }
 
     useEffect(() => {
-        setChallenge({ ...inputModel });
+        setChallenge({ ...inputModel, type: formType });
     }, [inputModel, formType]);
 
     return (

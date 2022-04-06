@@ -6,7 +6,7 @@ import { Context } from "../index";
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 export const routes = {
-    AUTH: '/auth',
+    AUTH: '/',
     MAIN: '/main',
 }
 
