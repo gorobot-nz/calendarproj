@@ -20,6 +20,8 @@ const ModalForm = ({ formType, isEdit, inputModel }) => {
     const [user] = useAuthState(auth)
     const challengesCollectionRef = collection(db, 'challenges')
 
+    console.log(inputModel, challenge)
+
     const handleChange = (event) => {
         setChallenge(challenge => ({ ...challenge, [event.target.name]: event.target.value }))
     }
@@ -52,11 +54,11 @@ const ModalForm = ({ formType, isEdit, inputModel }) => {
 
     const checkForm = inputModel.type ? inputModel.type : formType
 
-    const fields = [<FormGroup key={1} inputType='text' handler={handleChange} name='title' labelName='Title' val={challenge?.title} />]
+    const fields = [<FormGroup key={1} inputType='text' handler={handleChange} name='title' labelName='Title' val={challenge.title ? challenge.title : ''} />]
     if (checkForm !== REMINDER) {
-        fields.push(<FormGroup key={2} inputType='textarea' handler={handleChange} name='description' labelName='Description' val={challenge?.description} />)
+        fields.push(<FormGroup key={2} inputType='textarea' handler={handleChange} name='description' labelName='Description' val={challenge.description ? challenge.description : ''} />)
         if (checkForm !== TASK) {
-            fields.push(<FormSelect key={3} handler={handleChange} name='period' labelName='Period' val={challenge?.period} />)
+            fields.push(<FormSelect key={3} handler={handleChange} name='period' labelName='Period' val={challenge.period ? challenge.period : false} />)
         }
     }
 
@@ -67,10 +69,10 @@ const ModalForm = ({ formType, isEdit, inputModel }) => {
     return (
         <form className="modal-form">
             {fields}
-            <input id={isEdit ? 'update' : 'create'} className="wide-btn" type={'submit'} value='Save' onClick={submitSave} />
+            <input className="wide-btn" type={'submit'} value='Save' onClick={submitSave} />
             {
                 isEdit ?
-                    <input id='delete' className="wide-btn" type={'submit'} value='Delete' onClick={submitDelete} />
+                    <input className="wide-btn" type={'submit'} value='Delete' onClick={submitDelete} />
                     :
                     <></>
             }
