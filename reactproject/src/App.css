@@ -452,7 +452,7 @@ input:checked+.slider:before {
     width: 100px;
     height: 100px;
     border: 1px var(--border-black) solid;
-    background-color: white;    
+    background-color: white;
     cursor: pointer;
     border-radius: 50%;
 }
@@ -588,6 +588,11 @@ p {
 
 .auth-card .wide-btn {
     margin-top: 15px;
+}
+
+.settings-card {
+    margin: 200px auto;
+    width: 69%;
 }
 
 .card-logo {
