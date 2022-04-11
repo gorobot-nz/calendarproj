@@ -20,8 +20,6 @@ const ModalForm = ({ formType, isEdit, inputModel }) => {
     const [user] = useAuthState(auth)
     const challengesCollectionRef = collection(db, 'challenges')
 
-    console.log(inputModel, challenge)
-
     const handleChange = (event) => {
         setChallenge(challenge => ({ ...challenge, [event.target.name]: event.target.value }))
     }
